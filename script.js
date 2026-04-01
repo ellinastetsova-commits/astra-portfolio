@@ -324,7 +324,7 @@ function initPortfolioHover() {
 
 // ===== STICKY SECTION TOP CALC =====
 function initStickyTops() {
-  const stickySections = document.querySelectorAll('.hero, .marquee, .about, .portfolio, .services, .process, .contact');
+  const stickySections = document.querySelectorAll('.hero, .about, .portfolio, .services, .process, .contact');
   const vh = window.innerHeight;
 
   function calc() {

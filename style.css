@@ -249,7 +249,6 @@ button {
 
 /* ===== STICKY OVERLAP SECTIONS ===== */
 .hero,
-.marquee,
 .about,
 .portfolio,
 .services,
@@ -259,7 +258,6 @@ button {
   top: 0; /* JS will override for tall sections */
 }
 
-.marquee,
 .about,
 .portfolio,
 .services,
@@ -271,13 +269,7 @@ button {
   padding-top: calc(120px + 100px);
 }
 
-.marquee {
-  margin-top: -100px;
-  padding-top: calc(24px + 100px);
-}
-
 .hero     { z-index: 1; }
-.marquee  { z-index: 2; background: var(--bg); }
 .about    { z-index: 3; background: var(--bg); }
 .portfolio{ z-index: 4; }
 .services { z-index: 5; background: var(--bg); }
@@ -515,8 +507,12 @@ button {
 
 /* ===== MARQUEE ===== */
 .marquee {
-  padding-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  padding: 24px 0;
   overflow: hidden;
+  border-top: 1px solid rgba(0,0,0,0.05);
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
@@ -555,6 +551,7 @@ button {
 /* ===== ABOUT SECTION ===== */
 .about {
   padding: 120px 48px;
+  margin-top: 0;
 }
 
 .about__container {
