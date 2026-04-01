@@ -302,8 +302,20 @@ function initPortfolioHover() {
   }
   animateImg();
 
+  // Track if mouse is actually moving (not just scrolling)
+  let mouseMoving = false;
+  let moveTimer = null;
+
+  document.addEventListener('mousemove', () => {
+    mouseMoving = true;
+    clearTimeout(moveTimer);
+    moveTimer = setTimeout(() => { mouseMoving = false; }, 100);
+  });
+
   items.forEach(item => {
     item.addEventListener('mouseenter', () => {
+      // Only show preview if mouse is actually moving (not scroll-triggered)
+      if (!mouseMoving) return;
       const src = item.dataset.img;
       if (src) {
         hoverImgSrc.src = src;
@@ -314,6 +326,14 @@ function initPortfolioHover() {
     item.addEventListener('mousemove', (e) => {
       targetImgX = e.clientX + 20;
       targetImgY = e.clientY - 125;
+      // Also show if not yet visible (user moved mouse onto item)
+      if (!hoverImg.classList.contains('active')) {
+        const src = item.dataset.img;
+        if (src) {
+          hoverImgSrc.src = src;
+          hoverImg.classList.add('active');
+        }
+      }
     });
 
     item.addEventListener('mouseleave', () => {

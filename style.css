@@ -551,6 +551,7 @@ button {
 /* ===== ABOUT SECTION ===== */
 .about {
   padding: 120px 48px;
+  padding-bottom: 300px;
   margin-top: 0;
 }
 
@@ -650,6 +651,7 @@ button {
 /* ===== PORTFOLIO — INTERACTIVE LIST ===== */
 .portfolio {
   padding: 120px 48px;
+  padding-bottom: 300px;
   background: var(--bg-dark);
 }
 
@@ -805,7 +807,7 @@ button {
 /* ===== SERVICES SECTION ===== */
 .services {
   padding: 120px 48px;
-  padding-bottom: 160px;
+  padding-bottom: 300px;
 }
 
 .glass {
