@@ -289,12 +289,12 @@ button {
 
 /* ===== MOBILE MENU OVERLAY ===== */
 .nav__mobile-overlay {
-  display: none;
+  display: none !important;
 }
 
 @media (max-width: 768px) {
   .nav__mobile-overlay {
-    display: flex;
+    display: flex !important;
     position: fixed;
     top: 0;
     left: 0;
