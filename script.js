@@ -76,7 +76,7 @@ function initCursor() {
   follower.classList.add('visible');
 
   // Hover effects
-  const interactiveElements = document.querySelectorAll('a, button, .services__card, .portfolio__item');
+  const interactiveElements = document.querySelectorAll('a, button, .services__category, .portfolio__item, .portfolio__card, .reviews__card, .process__card, .tools__card');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('active');
@@ -232,6 +232,8 @@ function initScrollReveal() {
 // ===== NAV =====
 function initNav() {
   const nav = document.getElementById('nav');
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
 
   // Show nav after preloader
   nav.classList.add('show');
@@ -243,6 +245,22 @@ function initNav() {
       nav.classList.remove('scrolled');
     }
   });
+
+  // Burger menu toggle
+  if (burger) {
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+  }
 }
 
 // ===== COUNTER ANIMATION =====
@@ -285,66 +303,10 @@ function initCounters() {
   window.addEventListener('scroll', animateCounters);
 }
 
-// ===== PORTFOLIO HOVER IMAGE =====
-function initPortfolioHover() {
-  const hoverImg = document.getElementById('portfolioHoverImg');
-  const hoverImgSrc = document.getElementById('portfolioHoverImgSrc');
-  const items = document.querySelectorAll('.portfolio__item');
-  let imgX = 0, imgY = 0;
-  let targetImgX = 0, targetImgY = 0;
-
-  function animateImg() {
-    imgX += (targetImgX - imgX) * 0.1;
-    imgY += (targetImgY - imgY) * 0.1;
-    hoverImg.style.left = imgX + 'px';
-    hoverImg.style.top = imgY + 'px';
-    requestAnimationFrame(animateImg);
-  }
-  animateImg();
-
-  // Track if mouse is actually moving (not just scrolling)
-  let mouseMoving = false;
-  let moveTimer = null;
-
-  document.addEventListener('mousemove', () => {
-    mouseMoving = true;
-    clearTimeout(moveTimer);
-    moveTimer = setTimeout(() => { mouseMoving = false; }, 100);
-  });
-
-  items.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      // Only show preview if mouse is actually moving (not scroll-triggered)
-      if (!mouseMoving) return;
-      const src = item.dataset.img;
-      if (src) {
-        hoverImgSrc.src = src;
-        hoverImg.classList.add('active');
-      }
-    });
-
-    item.addEventListener('mousemove', (e) => {
-      targetImgX = e.clientX + 20;
-      targetImgY = e.clientY - 125;
-      // Also show if not yet visible (user moved mouse onto item)
-      if (!hoverImg.classList.contains('active')) {
-        const src = item.dataset.img;
-        if (src) {
-          hoverImgSrc.src = src;
-          hoverImg.classList.add('active');
-        }
-      }
-    });
-
-    item.addEventListener('mouseleave', () => {
-      hoverImg.classList.remove('active');
-    });
-  });
-}
 
 // ===== STICKY SECTION TOP CALC =====
 function initStickyTops() {
-  const stickySections = document.querySelectorAll('.hero, .about, .portfolio, .services, .process, .contact');
+  const stickySections = document.querySelectorAll('.hero, .about, .portfolio, .tools, .services, .process, .reviews, .contact');
   const vh = window.innerHeight;
 
   function calc() {
@@ -388,6 +350,25 @@ async function init() {
   // Wait for preloader
   await initPreloader();
 
+  // Init Vanta fog on hero
+  if (window.VANTA) {
+    VANTA.FOG({
+      el: "#hero",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      highlightColor: 0xf2c7b0,
+      midtoneColor: 0xf0cdf0,
+      lowlightColor: 0xf590fc,
+      baseColor: 0x82a8f0,
+      blurFactor: 0.90,
+      speed: 3.60,
+      zoom: 1.40
+    });
+  }
+
   // Init everything else
   initCursor();
   initMagnetic();
@@ -396,7 +377,6 @@ async function init() {
   initNav();
   initScrollReveal();
   initCounters();
-  initPortfolioHover();
   initStickyTops();
   initAnchors();
 }
