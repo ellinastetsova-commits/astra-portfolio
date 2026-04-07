@@ -1556,6 +1556,12 @@ button {
 
   .about__stats {
     gap: 24px;
+    justify-content: space-around;
+    text-align: center;
+  }
+
+  .stat {
+    text-align: center;
   }
 
   .stat__number {
@@ -1761,8 +1767,13 @@ button {
   }
 
   .about__stats {
-    flex-direction: column;
+    justify-content: space-around;
     gap: 16px;
+    text-align: center;
+  }
+
+  .stat {
+    text-align: center;
   }
 
   .tools__grid {
