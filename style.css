@@ -1464,7 +1464,6 @@ button {
   }
 
   .nav__links {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(250, 248, 245, 0.97);
@@ -1473,17 +1472,41 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 32px;
+    gap: 40px;
     z-index: 1000;
-  }
-
-  .nav__links.open {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     display: flex;
   }
 
-  .nav__links.open .nav__link {
+  .nav__links.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav__links .nav__link {
     color: var(--text);
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s;
+  }
+
+  .nav__links.open .nav__link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav__links.open .nav__link:nth-child(1) { transition-delay: 0.05s; }
+  .nav__links.open .nav__link:nth-child(2) { transition-delay: 0.1s; }
+  .nav__links.open .nav__link:nth-child(3) { transition-delay: 0.15s; }
+  .nav__links.open .nav__link:nth-child(4) { transition-delay: 0.2s; }
+
+  .nav__links .nav__link:hover {
+    color: var(--accent);
   }
 
   .nav__burger {
@@ -1597,12 +1620,13 @@ button {
 
   .services__row {
     gap: 8px;
-    flex-wrap: wrap;
   }
 
   .services__row-name {
     font-size: 14px;
     white-space: normal;
+    flex: 1;
+    min-width: 0;
   }
 
   .services__row-line {
@@ -1611,7 +1635,7 @@ button {
 
   .services__row-price {
     font-size: 16px;
-    margin-left: auto;
+    flex-shrink: 0;
   }
 
   .services__note {
@@ -1741,10 +1765,13 @@ button {
 
   .services__row-name {
     font-size: 13px;
+    flex: 1;
+    min-width: 0;
   }
 
   .services__row-price {
     font-size: 15px;
+    flex-shrink: 0;
   }
 
   .services__category-title {

@@ -266,15 +266,13 @@ function initNav() {
 // ===== COUNTER ANIMATION =====
 function initCounters() {
   const counters = document.querySelectorAll('.stat__number');
-  let animated = false;
 
   function animateCounters() {
-    if (animated) return;
-
     counters.forEach(counter => {
+      if (counter.dataset.animated) return;
       const rect = counter.getBoundingClientRect();
       if (rect.top < window.innerHeight * 0.9) {
-        animated = true;
+        counter.dataset.animated = '1';
         const target = parseFloat(counter.dataset.count);
         const isFloat = target % 1 !== 0;
         const duration = 2000;
@@ -301,6 +299,7 @@ function initCounters() {
   }
 
   window.addEventListener('scroll', animateCounters);
+  animateCounters();
 }
 
 
