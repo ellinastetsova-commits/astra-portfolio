@@ -37,7 +37,7 @@
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <a href="#hero" class="nav__logo magnetic" data-strength="20">астра</a>
-    <div class="nav__links" id="navLinks">
+    <div class="nav__links nav__links--desktop">
       <a href="#about" class="nav__link magnetic" data-strength="15">обо мне</a>
       <a href="#portfolio" class="nav__link magnetic" data-strength="15">портфолио</a>
       <a href="#services" class="nav__link magnetic" data-strength="15">услуги</a>
@@ -49,6 +49,14 @@
       <span></span>
     </button>
   </nav>
+
+  <!-- Mobile Menu Overlay (outside nav to avoid transform containment) -->
+  <div class="nav__mobile-overlay" id="navLinks">
+    <a href="#about" class="nav__link">обо мне</a>
+    <a href="#portfolio" class="nav__link">портфолио</a>
+    <a href="#services" class="nav__link">услуги</a>
+    <a href="#contact" class="nav__link">контакты</a>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
