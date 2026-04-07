@@ -307,13 +307,20 @@ function initCounters() {
 // ===== STICKY SECTION TOP CALC =====
 function initStickyTops() {
   const stickySections = document.querySelectorAll('.hero, .about, .portfolio, .tools, .services, .process, .reviews, .contact');
-  const vh = window.innerHeight;
 
   function calc() {
+    // Disable sticky on mobile
+    if (window.innerWidth <= 768) {
+      stickySections.forEach(section => {
+        section.style.top = '';
+      });
+      return;
+    }
+
+    const vh = window.innerHeight;
     stickySections.forEach(section => {
       const h = section.offsetHeight;
       if (h > vh) {
-        // Section taller than viewport: pin so the bottom is visible
         section.style.top = (vh - h) + 'px';
       } else {
         section.style.top = '0px';

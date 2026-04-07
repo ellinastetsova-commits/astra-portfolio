@@ -1429,8 +1429,38 @@ button {
 /* 1024px — no overrides needed */
 
 @media (max-width: 768px) {
+  /* Disable sticky overlap on mobile */
+  .hero,
+  .about,
+  .portfolio,
+  .tools,
+  .services,
+  .process,
+  .reviews,
+  .contact {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .about,
+  .portfolio,
+  .tools,
+  .services,
+  .process,
+  .reviews,
+  .contact {
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: 80px;
+  }
+
   .nav {
-    padding: 16px 24px;
+    padding: 16px 20px;
+  }
+
+  .nav.scrolled {
+    padding: 12px 20px;
   }
 
   .nav__links {
@@ -1461,24 +1491,29 @@ button {
   }
 
   .hero {
-    padding: 100px 24px 80px;
+    padding: 100px 20px 60px;
+    min-height: 100svh;
   }
 
   .hero__name {
-    font-size: clamp(56px, 15vw, 100px);
+    font-size: clamp(52px, 14vw, 90px);
+  }
+
+  .hero__title {
+    font-size: 16px;
   }
 
   .about {
-    padding: 80px 24px 300px;
+    padding: 80px 20px 60px;
   }
 
   .about__container {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
   .about__photo {
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
   }
 
@@ -1491,7 +1526,7 @@ button {
   }
 
   .portfolio {
-    padding: 80px 24px 220px;
+    padding: 80px 20px 60px;
   }
 
   .portfolio__grid {
@@ -1500,8 +1535,22 @@ button {
     gap: 20px;
   }
 
+  .portfolio__card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .portfolio__card:last-child:nth-child(odd) .portfolio__card-img {
+    aspect-ratio: 16/10;
+  }
+
+  .portfolio__card-info {
+    padding: 16px 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
   .portfolio__card-name {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .portfolio__card-tag {
@@ -1510,7 +1559,12 @@ button {
   }
 
   .tools {
-    padding: 80px 24px 300px;
+    padding: 80px 20px 60px;
+  }
+
+  .tools__subtitle {
+    font-size: 15px;
+    margin-bottom: 32px;
   }
 
   .tools__grid {
@@ -1521,8 +1575,16 @@ button {
     grid-column: span 1;
   }
 
+  .tools__card-title {
+    font-size: 16px;
+  }
+
+  .tools__card-desc {
+    font-size: 13px;
+  }
+
   .services {
-    padding: 80px 24px 220px;
+    padding: 80px 20px 60px;
   }
 
   .services__categories {
@@ -1530,15 +1592,17 @@ button {
   }
 
   .services__category {
-    padding: 24px 20px;
+    padding: 24px 18px;
   }
 
   .services__row {
     gap: 8px;
+    flex-wrap: wrap;
   }
 
   .services__row-name {
-    font-size: 16px;
+    font-size: 14px;
+    white-space: normal;
   }
 
   .services__row-line {
@@ -1546,12 +1610,19 @@ button {
   }
 
   .services__row-price {
-    font-size: 18px;
+    font-size: 16px;
     margin-left: auto;
   }
 
+  .services__note {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 20px;
+  }
+
   .process {
-    padding: 80px 24px 160px;
+    padding: 80px 20px 60px;
   }
 
   .process__cards {
@@ -1559,8 +1630,16 @@ button {
     gap: 16px;
   }
 
+  .process__card {
+    padding: 24px 20px;
+  }
+
+  .process__card-title {
+    font-size: 17px;
+  }
+
   .reviews {
-    padding: 80px 24px;
+    padding: 80px 20px 60px;
   }
 
   .reviews__grid {
@@ -1568,13 +1647,30 @@ button {
     gap: 20px;
   }
 
+  .reviews__card {
+    padding: 24px;
+  }
+
   .contact {
-    padding: 80px 24px;
+    padding: 80px 20px 60px;
+  }
+
+  .contact__text {
+    font-size: 16px;
   }
 
   .contact__links {
     flex-direction: column;
     align-items: center;
+  }
+
+  .contact__link {
+    padding: 16px 28px;
+    font-size: 15px;
+  }
+
+  .marquee__track span {
+    font-size: 13px;
   }
 
   .cursor, .cursor-follower {
@@ -1590,11 +1686,15 @@ button {
   }
 
   .section-title {
-    font-size: clamp(30px, 7vw, 42px);
+    font-size: clamp(28px, 7vw, 40px);
+  }
+
+  .section-cta {
+    margin-top: 32px;
   }
 
   .footer {
-    padding: 24px;
+    padding: 24px 20px;
   }
 
   .footer__content {
@@ -1606,12 +1706,20 @@ button {
   .footer__left {
     align-items: center;
   }
+
+  .blob--1 { width: 300px; height: 300px; }
+  .blob--2 { width: 250px; height: 250px; }
+  .blob--3 { width: 200px; height: 200px; }
 }
 
 @media (max-width: 480px) {
   .hero__cta {
     padding: 16px 28px;
     font-size: 14px;
+  }
+
+  .hero__title {
+    font-size: 15px;
   }
 
   .about__stats {
@@ -1623,7 +1731,23 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .tools__card--wide {
+    grid-column: span 1;
+  }
+
   .process__cards {
     grid-template-columns: 1fr;
+  }
+
+  .services__row-name {
+    font-size: 13px;
+  }
+
+  .services__row-price {
+    font-size: 15px;
+  }
+
+  .services__category-title {
+    font-size: 18px;
   }
 }
