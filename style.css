@@ -43,6 +43,10 @@ body {
   cursor: none;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -1517,8 +1521,8 @@ button {
     padding: 12px 20px;
   }
 
-  .nav__links--desktop {
-    display: none;
+  .nav__links.nav__links--desktop {
+    display: none !important;
   }
 
   .nav__burger {

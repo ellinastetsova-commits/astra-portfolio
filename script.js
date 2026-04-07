@@ -251,6 +251,7 @@ function initNav() {
     burger.addEventListener('click', () => {
       burger.classList.toggle('active');
       navLinks.classList.toggle('open');
+      document.body.classList.toggle('menu-open');
     });
 
     // Close menu on link click
@@ -258,6 +259,7 @@ function initNav() {
       link.addEventListener('click', () => {
         burger.classList.remove('active');
         navLinks.classList.remove('open');
+        document.body.classList.remove('menu-open');
       });
     });
   }
