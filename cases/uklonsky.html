@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кейс · Уклонский и партнёры — премиум-агентство недвижимости</title>
+<meta property="og:title" content="Уклонский и партнёры · кейс веб-дизайна">
+<meta property="og:description" content="Премиум-агентство недвижимости в Санкт-Петербурге. 17 страниц, dark luxe, mobile-first, деплой за 2 дня.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1F1D1B;
+    --bg-2:#26231F;
+    --paper:#F3EFE8;
+    --gold:#D4B26A;
+    --gold-light:#E8C97F;
+    --gold-dark:#B89556;
+    --white:#FFFFFF;
+    --muted:rgba(244,236,216,.62);
+    --line:rgba(212,178,106,.18);
+    --maxw:1240px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;line-height:1.12;letter-spacing:.01em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{
+    font-family:'Inter';font-weight:500;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:22px;display:inline-block;
+  }
+  .gold{color:var(--gold)}
+  .muted{color:var(--muted)}
+  section{position:relative}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;backdrop-filter:blur(10px);
+    background:linear-gradient(to bottom,rgba(31,29,27,.85),rgba(31,29,27,0));
+    transition:background .3s}
+  .topbar .brand{font-family:'Oswald';font-weight:700;font-size:15px;letter-spacing:.14em}
+  .topbar .meta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:170px 0 90px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;
+    background:url('hero-bg.jpg') center 40%/cover no-repeat;opacity:.5}
+  .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(120% 80% at 80% 6%, rgba(212,178,106,.20), transparent 48%),
+      linear-gradient(180deg, rgba(31,29,27,.48) 0%, rgba(31,29,27,.32) 40%, rgba(31,29,27,.74) 76%, #1F1D1B 100%),
+      linear-gradient(90deg, rgba(31,29,27,.82) 0%, rgba(31,29,27,.2) 48%, rgba(31,29,27,.4) 100%)}
+  .hero .wrap{position:relative;z-index:2}
+  .hero-tags{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:30px}
+  .hero h1{font-size:clamp(52px,7.6vw,118px);letter-spacing:.005em;text-shadow:0 8px 60px rgba(0,0,0,.45)}
+  .hero h1 span{display:block}
+  .hero .sub{margin-top:26px;font-weight:300;font-size:clamp(17px,1.7vw,22px);color:rgba(244,236,216,.82);max-width:960px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;margin-top:64px}
+  .role-row{display:flex;flex-wrap:wrap;gap:40px;margin-top:40px;padding-top:34px;border-top:1px solid var(--line)}
+  .role-row .item .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .role-row .item .v{font-family:'Oswald';font-weight:600;font-size:19px;letter-spacing:.02em}
+
+  /* browser mockup */
+  .browser{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 50px 120px -40px rgba(0,0,0,.85);background:#0d0c0b}
+  .browser .bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:#171513;border-bottom:1px solid rgba(255,255,255,.05)}
+  .browser .bar i{width:11px;height:11px;border-radius:50%;background:#3a3631;display:inline-block}
+  .browser .bar .url{margin-left:14px;font-size:11px;color:var(--muted);letter-spacing:.04em;
+    background:#0f0e0d;padding:5px 14px;border-radius:6px;flex:1;max-width:360px}
+  .browser img{width:100%;display:block}
+  .scrollwin{max-height:640px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold-dark) #171513}
+  .scrollwin::-webkit-scrollbar{width:10px}
+  .scrollwin::-webkit-scrollbar-track{background:#171513}
+  .scrollwin::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:10px}
+  .scrollhint{margin-left:auto;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);animation:bob 1.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(2px)}}
+  .tilt{transform:perspective(2000px) rotateY(-4deg) rotateX(1.5deg);transition:transform .6s}
+  .tilt:hover{transform:perspective(2000px) rotateY(0) rotateX(0)}
+
+  /* ---------- SECTION SHELL ---------- */
+  .block{padding:110px 0}
+  .block.tight{padding:80px 0}
+  .paper{background:var(--paper);color:var(--bg)}
+  .paper .eyebrow{color:var(--gold-dark)}
+  .paper .muted{color:rgba(31,29,27,.6)}
+  .paper .gold{color:var(--gold-dark)}
+  .section-head{max-width:780px;margin-bottom:60px}
+  .section-head h2{font-size:clamp(36px,5vw,68px)}
+  .section-head p{margin-top:22px;font-size:18px;font-weight:300;color:var(--muted)}
+  .paper .section-head p{color:rgba(31,29,27,.7)}
+
+  /* ---------- BIG QUOTE ---------- */
+  .quote{padding:120px 0;text-align:center;background:var(--bg-2)}
+  .quote .q{font-family:'Oswald';font-weight:500;text-transform:none;
+    font-size:clamp(26px,3.6vw,46px);line-height:1.25;max-width:920px;margin:0 auto;letter-spacing:.005em}
+  .quote .q .gold{font-weight:700}
+  .quote .by{margin-top:34px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- NUMBERS ---------- */
+  .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+  .nums .cell{background:#fff;border:1px solid rgba(31,29,27,.07);border-radius:16px;
+    padding:42px 36px 38px;position:relative;overflow:hidden;
+    box-shadow:0 18px 44px -30px rgba(31,29,27,.4);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
+  .nums .cell:hover{transform:translateY(-7px);box-shadow:0 36px 70px -32px rgba(31,29,27,.45)}
+  .nums .cell::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+    background:linear-gradient(180deg,var(--gold-light),var(--gold-dark))}
+  .nums .cell .idx{position:absolute;top:20px;right:24px;font-size:11px;letter-spacing:.18em;
+    color:var(--gold-dark);font-weight:600;font-family:'Inter'}
+  .nums .n{font-family:'Oswald';font-weight:700;font-size:clamp(56px,6vw,86px);color:#1F1D1B;line-height:.95}
+  .nums .n .u{color:var(--gold-dark);font-size:.34em;vertical-align:baseline;margin-left:.32em}
+  .nums .l{margin-top:18px;font-size:14.5px;color:rgba(31,29,27,.62);letter-spacing:.01em}
+
+  /* ---------- PALETTE ---------- */
+  .palette{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-radius:12px;overflow:hidden}
+  .palette .sw{aspect-ratio:1/1.15;display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
+  .palette .sw .hex{font-size:12px;letter-spacing:.04em;font-weight:500}
+  .palette .sw .nm{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-top:3px}
+
+  .type-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:64px;align-items:start}
+  .type-card{border:1px solid var(--line);border-radius:12px;padding:40px}
+  .type-card .lab{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  .type-card .big{font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:48px;line-height:1.05}
+  .type-card .specimen{font-size:38px;font-weight:300;line-height:1.3}
+  .type-card .scale{margin-top:22px;font-size:13px;color:var(--muted);line-height:2}
+
+  /* ---------- SHOWCASE GRID ---------- */
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .shot{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);
+    box-shadow:0 30px 70px -40px rgba(0,0,0,.8);background:#0d0c0b}
+  .shot .barmini{display:flex;gap:6px;padding:11px 14px;background:#171513}
+  .shot .barmini i{width:9px;height:9px;border-radius:50%;background:#3a3631}
+  .shot img{width:100%;display:block;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .shot:hover img{transform:scale(1.04)}
+  .shot .cap{padding:18px 22px;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(255,255,255,.05)}
+  .shot .cap .t{font-family:'Oswald';font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+  .shot .cap .n{font-size:12px;color:var(--gold);letter-spacing:.1em}
+
+  /* feature full image */
+  .feature-shot{margin-top:64px}
+
+  /* ---------- MOBILE PHONES ---------- */
+  .phones{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .phone{width:280px;border-radius:38px;padding:11px;background:#0a0908;
+    border:1px solid rgba(255,255,255,.09);box-shadow:0 50px 100px -40px rgba(0,0,0,.85);position:relative}
+  .phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);
+    width:90px;height:7px;border-radius:10px;background:#000;z-index:3}
+  .phone img{width:100%;display:block;border-radius:28px}
+  .phone.lift{transform:translateY(-34px)}
+
+  .feat-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin-top:56px}
+  .feat-list .li{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .feat-list .li .mark{color:var(--gold);font-family:'Oswald';font-weight:700;flex-shrink:0}
+
+  /* ---------- TECH ---------- */
+  .tech-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:48px}
+  .tech-card{border:1px solid var(--line);border-radius:12px;padding:32px}
+  .tech-card h4{font-size:15px;letter-spacing:.1em;color:var(--gold);margin-bottom:16px}
+  .tech-card p{font-size:14px;color:var(--muted);line-height:1.7}
+
+  /* ---------- RESULT / CTA ---------- */
+  .result{padding:130px 0;text-align:center}
+  .result h2{font-size:clamp(40px,6vw,84px)}
+  .result .lead{margin-top:28px;font-size:19px;font-weight:300;color:var(--muted);max-width:680px;margin-left:auto;margin-right:auto}
+  .result.paper .lead{color:rgba(31,29,27,.72)}
+  .btn{display:inline-flex;align-items:center;gap:10px;margin-top:48px;
+    background:var(--gold);color:var(--bg);font-weight:600;font-size:13px;letter-spacing:.16em;
+    text-transform:uppercase;text-decoration:none;padding:18px 38px;border-radius:100px;transition:background .25s}
+  .btn:hover{background:var(--gold-light)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--gold)}
+  .btn.ghost:hover{background:rgba(212,178,106,.08)}
+  .btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+  footer{padding:90px 0 70px;border-top:1px solid var(--line);text-align:center}
+  footer .name{font-family:'Oswald';font-weight:700;font-size:30px;letter-spacing:.08em}
+  footer .role{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:14px}
+  footer .links{margin-top:28px;font-size:14px;color:var(--muted)}
+  footer .links a{color:var(--white);text-decoration:none;margin:0 12px;border-bottom:1px solid var(--line);padding-bottom:2px}
+  footer .links a:hover{color:var(--gold)}
+
+  .divider-num{font-family:'Oswald';font-weight:700;font-size:13px;letter-spacing:.3em;color:var(--gold-dark);margin-bottom:18px;display:block}
+
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .type-grid,.shots,.tech-grid,.feat-list{grid-template-columns:1fr}
+    .nums{grid-template-columns:1fr 1fr}
+    .palette{grid-template-columns:repeat(3,1fr)}
+    .phone.lift{transform:none}
+    .wrap{padding:0 20px}
+    .topbar .meta{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="brand">У&П · КЕЙС</div>
+  <div class="meta">Web design & development · 2026</div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tags reveal">Brand identity &nbsp;·&nbsp; Web design &nbsp;·&nbsp; Mobile-first &nbsp;·&nbsp; Dark luxe</div>
+    <h1 class="reveal"><span>Уклонский</span><span>и&nbsp;партнёры</span></h1>
+    <p class="sub reveal">Премиум-агентство недвижимости в Санкт-Петербурге.<br>Сайт, который не стыдно отправить клиенту с квартирой за 25 миллионов.</p>
+
+    <div class="hero-grid">
+      <div class="browser tilt reveal">
+        <div class="bar"><i></i><i></i><i></i><span class="url">uklonsky.ru</span></div>
+        <img src="screenshots/desktop-firstscreen/01-index.png" alt="Главная страница Уклонский и партнёры">
+      </div>
+      <div class="reveal">
+        <p class="muted" style="font-size:17px;font-weight:300;line-height:1.7">
+          Полный цикл под ключ: бренд-айдентика, дизайн, ручная вёрстка и деплой
+          на собственный хостинг. 17&nbsp;страниц, 13&nbsp;лендингов услуг,
+          мобильная версия как отдельный сценарий, заявки&nbsp;— прямо в&nbsp;Telegram владельцу.
+        </p>
+        <div class="role-row">
+          <div class="item"><div class="k">Роль</div><div class="v">Дизайн + вёрстка + деплой</div></div>
+          <div class="item"><div class="k">Год</div><div class="v">2026</div></div>
+          <div class="item"><div class="k">Город</div><div class="v">Санкт-Петербург</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЗАДАЧА ================= -->
+<section class="block tight">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">01 — КЛИЕНТ И ЗАДАЧА</span>
+      <h2>Бренду нужно было <span class="gold">лицо</span></h2>
+      <p>«Уклонский и партнёры» работают там, где цена ошибки — миллионы: аукционная
+      продажа, торги по банкротству, флиппинг, ипотечный брокеридж, юридическое
+      сопровождение. Сильная экспертиза — и ни одного сайта, который бы это показывал.
+      Клиент с дорогой недвижимостью должен с первого экрана понимать: здесь работают всерьёз.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUOTE ================= -->
+<section class="quote">
+  <div class="wrap">
+    <p class="q reveal">«Нужен сайт, который <span class="gold">не стыдно отправить</span> клиенту
+    с квартирой за 25&nbsp;миллионов — и чтобы он сразу понял, что попал к&nbsp;профессионалам».</p>
+    <div class="by reveal">— Бриф клиента</div>
+  </div>
+</section>
+
+<!-- ================= ЦИФРЫ ================= -->
+<section class="block tight paper">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">02 — МАСШТАБ</span>
+      <h2>Цифры проекта</h2>
+      <p>Объём, собранный вручную — без конструкторов, шаблонов и лишних зависимостей.</p>
+    </div>
+    <div class="nums reveal">
+      <div class="cell"><span class="idx">01</span><div class="n">17</div><div class="l">страниц сайта</div></div>
+      <div class="cell"><span class="idx">02</span><div class="n">13</div><div class="l">отдельных лендингов услуг</div></div>
+      <div class="cell"><span class="idx">03</span><div class="n">9</div><div class="l">карточек команды + подрядчики</div></div>
+      <div class="cell"><span class="idx">04</span><div class="n">2</div><div class="l">дня от макета до прода</div></div>
+      <div class="cell"><span class="idx">05</span><div class="n">3.4<span class="u">МБ</span></div><div class="l">hero-видео (было 31&nbsp;МБ)</div></div>
+      <div class="cell"><span class="idx">06</span><div class="n">0</div><div class="l">фреймворков и конструкторов</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= КОНЦЕПЦИЯ / ПАЛИТРА ================= -->
+<section class="block paper">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">03 — ВИЗУАЛЬНАЯ КОНЦЕПЦИЯ</span>
+      <h2>Dark luxe</h2>
+      <p>Референсы — финские архитектурные бюро и скандинавский интерьерный люкс:
+      Vatanen, Glasshaven, SIWOOD. Сдержанно, дорого, с воздухом. Глубокий кофейный
+      фон, золото как единственный акцент, светлые «выдох»-секции внутри тёмного сайта.</p>
+    </div>
+
+    <div class="palette reveal">
+      <div class="sw" style="background:#1F1D1B;color:#fff"><span class="hex">#1F1D1B</span><span class="nm">Фон</span></div>
+      <div class="sw" style="background:#D4B26A;color:#1F1D1B"><span class="hex">#D4B26A</span><span class="nm">Золото</span></div>
+      <div class="sw" style="background:#E8C97F;color:#1F1D1B"><span class="hex">#E8C97F</span><span class="nm">Золото свет.</span></div>
+      <div class="sw" style="background:#B89556;color:#1F1D1B"><span class="hex">#B89556</span><span class="nm">Золото тёмн.</span></div>
+      <div class="sw" style="background:#F3EFE8;color:#1F1D1B;border:1px solid rgba(31,29,27,.1)"><span class="hex">#F3EFE8</span><span class="nm">Бумага</span></div>
+      <div class="sw" style="background:#FFFFFF;color:#1F1D1B;border:1px solid rgba(31,29,27,.1)"><span class="hex">#FFFFFF</span><span class="nm">Текст</span></div>
+    </div>
+
+    <div class="type-grid">
+      <div class="type-card reveal" style="border-color:rgba(31,29,27,.12)">
+        <div class="lab" style="color:#B89556">Заголовки — Oswald Bold</div>
+        <div class="big">УКЛОНСКИЙ<br>И ПАРТНЁРЫ</div>
+        <div class="scale" style="color:rgba(31,29,27,.6)">CAPS · letter-spacing .01–.03em<br>H1 96–120px · H2 56–72px · H3 28–40px</div>
+      </div>
+      <div class="type-card reveal" style="border-color:rgba(31,29,27,.12)">
+        <div class="lab" style="color:#B89556">Текст — Inter</div>
+        <div class="specimen" style="color:#1F1D1B">Полный цикл работы с&nbsp;недвижимостью — от&nbsp;оценки до&nbsp;сделки.</div>
+        <div class="scale" style="color:rgba(31,29,27,.6)">300 / 400 / 500 / 600<br>Body 15–17px · Eyebrow 11px CAPS .18em</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= АУКЦИОН HIGHLIGHT ================= -->
+<section class="block tight">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">04 — ФЛАГМАНСКАЯ УСЛУГА</span>
+      <h2>Аукционный метод</h2>
+      <p>Главная услуга агентства — продажа за 14 дней через управляемую конкуренцию
+      покупателей. Гигантская цифра «14», золотая типографика, строка метрик: 20K+ просмотров,
+      100+ сделок, 25+ лет на рынке. Один экран — и понятно, в чём метод.</p>
+    </div>
+    <div class="browser tilt reveal">
+      <div class="bar"><i></i><i></i><i></i><span class="url">uklonsky.ru/auction</span></div>
+      <img src="screenshots/desktop-firstscreen/auction.png" alt="Аукционный метод продажи">
+    </div>
+  </div>
+</section>
+
+<!-- ================= СЕТКА УСЛУГ ================= -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">05 — 13 ЛЕНДИНГОВ УСЛУГ</span>
+      <h2>У каждой услуги — своя посадочная</h2>
+      <p>Единая система, но каждая страница рассказывает свою историю: hero с метриками,
+      этапы работы, светлая «выдох»-секция, отзывы, форма заявки. Один дизайн-язык на тринадцати лендингах.</p>
+    </div>
+    <div class="shots">
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/classic-sale.png" alt="Классическая продажа">
+        <div class="cap"><span class="t">Классическая продажа</span><span class="n">/ 02</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/bankrupt.png" alt="Торги по банкротству">
+        <div class="cap"><span class="t">Торги по банкротству</span><span class="n">/ 07</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/novostroy.png" alt="Покупка новостройки">
+        <div class="cap"><span class="t">Покупка новостройки</span><span class="n">/ 03</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/design.png" alt="Дизайн-проект">
+        <div class="cap"><span class="t">Дизайн-проект</span><span class="n">/ 10</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/flipping.png" alt="Флиппинг">
+        <div class="cap"><span class="t">Флиппинг</span><span class="n">/ 08</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/zagorod.png" alt="Загородная недвижимость">
+        <div class="cap"><span class="t">Загородная недвижимость</span><span class="n">/ 13</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/mortgage.png" alt="Ипотечный брокер">
+        <div class="cap"><span class="t">Ипотечный брокер</span><span class="n">/ 05</span></div></div>
+      <div class="shot reveal"><div class="barmini"><i></i><i></i><i></i></div>
+        <img src="screenshots/desktop-firstscreen/legal.png" alt="Юридическое сопровождение">
+        <div class="cap"><span class="t">Юридическое сопровождение</span><span class="n">/ 06</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= МОБИЛЬНАЯ ================= -->
+<section class="block paper">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">06 — МОБИЛЬНАЯ ВЕРСИЯ</span>
+      <h2>Сначала телефон,<br>потом десктоп</h2>
+      <p>Сайт открывают в основном с телефона. Поэтому мобильная вёрстка — не ужатый десктоп,
+      а отдельный продуманный сценарий: full-screen бургер-меню, hero-видео в фоне, карусели
+      со snap-x, кнопки во всю ширину, карточки команды 2-в-ряд.</p>
+    </div>
+    <div class="phones reveal">
+      <div class="phone"><img src="screenshots/mobile-firstscreen/01-index.png" alt="Главная на телефоне"></div>
+      <div class="phone lift"><img src="screenshots/mobile-firstscreen/auction.png" alt="Аукцион на телефоне"></div>
+      <div class="phone"><img src="screenshots/mobile-firstscreen/design.png" alt="Дизайн-проект на телефоне"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ФИШКИ ================= -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">07 — ДЕТАЛИ, КОТОРЫЕ РЕШАЮТ</span>
+      <h2>До последнего пикселя</h2>
+      <p>Премиум — это не «дорогая картинка», а сумма мелочей, которые замечаешь не сразу,
+      но чувствуешь сразу.</p>
+    </div>
+    <div class="feat-list">
+      <div class="li reveal"><span class="mark">→</span><span>Hero-видео сжато с 31&nbsp;МБ до&nbsp;3.4&nbsp;МБ через ffmpeg — 1080p без аудио, грузится мгновенно.</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>Бейдж «+13 подрядчиков» в команде — золотая карточка с числом clamp(54–96px).</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>Модалка успеха заявки не исчезает сама — есть кнопка «Закрыть», клиент успевает прочитать.</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>Светлые «выдох»-секции внутри тёмного сайта работают как пауза, как глоток воздуха.</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>Favicon — белая монограмма «здание + весы правосудия» на тёмном фоне.</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>OG-теги для красивых превью, когда ссылку репостят в мессенджерах.</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>Тройная страховка от переноса слов в заголовках (nowrap + inline-block + &amp;nbsp;).</span></div>
+      <div class="li reveal"><span class="mark">→</span><span>Единый принцип паддингов — никаких «коробок в коробке» на мобилке.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ТЕХНИКА ================= -->
+<section class="block tight">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="divider-num">08 — ТЕХНИЧЕСКАЯ ЧАСТЬ</span>
+      <h2>Без фреймворков<br>и конструкторов</h2>
+      <p>Это не Tilda и не WordPress. Каждая страница — чистый HTML/CSS/JS, ручная вёрстка
+      без зависимостей. Сайт грузится мгновенно, работает на любом устройстве и не сломается
+      через год от обновления плагина.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal"><h4>СТЕК</h4><p>HTML · CSS · vanilla JS. CSS и JS встроены в каждую страницу, фото в base64. Ноль внешних зависимостей.</p></div>
+      <div class="tech-card reveal"><h4>ЗАЯВКИ</h4><p>PHP-скрипт принимает форму и отправляет заявку прямо в Telegram-бот владельцу. Без CRM-прослоек.</p></div>
+      <div class="tech-card reveal"><h4>ХОСТИНГ</h4><p>reg.ru — российский, открывается у всех операторов. SSL Let's Encrypt продлевается сам.</p></div>
+      <div class="tech-card reveal"><h4>ДЕПЛОЙ</h4><p>Одной командой rsync через SSH. Правки выкатываются за секунды, без пересборки.</p></div>
+      <div class="tech-card reveal"><h4>СКОРОСТЬ</h4><p>HTTP/2, gzip, оптимизация изображений. Первый контент за 1–2 секунды на 4G.</p></div>
+      <div class="tech-card reveal"><h4>АВТОНОМНОСТЬ</h4><p>Продукт можно дорабатывать без переверстки: отзывы, новости, новые услуги добавляются блоками.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= РЕЗУЛЬТАТ ================= -->
+<section class="result paper">
+  <div class="wrap">
+    <span class="divider-num reveal">09 — РЕЗУЛЬТАТ</span>
+    <h2 class="reveal">Запущен.<br>Заявки идут.</h2>
+    <p class="lead reveal">Сайт работает по адресу <span class="gold">uklonsky.ru</span>. Полноценное лицо
+    премиум-бренда: 13 услуг — 13 лендингов, мобильная версия у всех операторов,
+    заявки напрямую в личку владельцу. Автономный продукт, который можно развивать без вёрстки заново.</p>
+  </div>
+</section>
+
+<!-- ================= FOOTER / CTA ================= -->
+<footer>
+  <div class="wrap">
+    <div class="name reveal">ELLINA STETSOVA</div>
+    <div class="role reveal">Web design &amp; development · 2026</div>
+    <div class="btn-row reveal" style="margin-top:36px">
+      <a href="https://www.behance.net/ellinastetsova" class="btn">Смотреть портфолио</a>
+      <a href="#" class="btn ghost">Хочу похожий проект</a>
+    </div>
+    <div class="links reveal">
+      <a href="https://www.behance.net/ellinastetsova">Behance</a>
+      <a href="https://t.me/astrasdesign">Telegram</a>
+      <a href="https://uklonsky.ru">uklonsky.ru</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay = (Math.min(i%4,3)*70)+'ms';
+    io.observe(el);
+  });
+  // topbar solidify
+  const tb=document.getElementById('topbar');
+  addEventListener('scroll',()=>{ tb.style.background = scrollY>60
+    ? 'rgba(31,29,27,.92)' : 'linear-gradient(to bottom,rgba(31,29,27,.85),rgba(31,29,27,0))'; });
+</script>
+</body>
+</html>
