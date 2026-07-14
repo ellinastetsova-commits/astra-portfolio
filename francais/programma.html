@@ -1,0 +1,631 @@
+<title>Le français — à partir de zéro · программа для Эллины</title>
+<style>
+  :root {
+    --paper: #FBFAF5;
+    --paper-2: #F4F2EA;
+    --ink: #1A2340;
+    --ink-soft: #4A5372;
+    --ink-faint: #8189A3;
+    --line: #DCDACF;
+    --line-blue: #C3D2E8;
+    --line-violet: #D6CEE0;
+    --bleu: #2C4C9E;
+    --bleu-bright: #3A62C4;
+    --framboise: #C0405F;
+    --or: #A9843F;
+    --card: #FFFFFF;
+    --card-2: #FDFCF8;
+    --shadow: 26 35 64;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #10162B;
+      --paper-2: #161D36;
+      --ink: #EDEFF6;
+      --ink-soft: #AEB6D0;
+      --ink-faint: #757EA0;
+      --line: #2A3252;
+      --line-blue: #2C3A63;
+      --line-violet: #3A3358;
+      --bleu: #7C99DE;
+      --bleu-bright: #94ABE8;
+      --framboise: #E68199;
+      --or: #D0AA65;
+      --card: #182142;
+      --card-2: #141B37;
+      --shadow: 0 0 0;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FBFAF5; --paper-2: #F4F2EA; --ink: #1A2340; --ink-soft: #4A5372;
+    --ink-faint: #8189A3; --line: #DCDACF; --line-blue: #C3D2E8; --line-violet: #D6CEE0;
+    --bleu: #2C4C9E; --bleu-bright: #3A62C4; --framboise: #C0405F; --or: #A9843F;
+    --card: #FFFFFF; --card-2: #FDFCF8; --shadow: 26 35 64;
+  }
+  :root[data-theme="dark"] {
+    --paper: #10162B; --paper-2: #161D36; --ink: #EDEFF6; --ink-soft: #AEB6D0;
+    --ink-faint: #757EA0; --line: #2A3252; --line-blue: #2C3A63; --line-violet: #3A3358;
+    --bleu: #7C99DE; --bleu-bright: #94ABE8; --framboise: #E68199; --or: #D0AA65;
+    --card: #182142; --card-2: #141B37; --shadow: 0 0 0;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+  .serif { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif; }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace; }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 22px; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 74px 22px 60px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-lines {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(to bottom, transparent 0 31px, var(--line-blue) 31px 32px),
+      linear-gradient(to right, transparent, transparent);
+    opacity: .5;
+    mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 70%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 70%, transparent);
+    pointer-events: none;
+  }
+  .hero-margin {
+    position: absolute; top: 0; bottom: 0; left: max(22px, calc(50% - 470px + 22px));
+    width: 2px; background: var(--line-violet); opacity: .8;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 940px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 12.5px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--framboise); font-weight: 600; margin: 0 0 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ""; width: 34px; height: 1.5px; background: var(--framboise); display: inline-block; }
+  h1.title {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(38px, 8vw, 76px);
+    line-height: 1.02; margin: 0; letter-spacing: -.01em; text-wrap: balance;
+    color: var(--ink);
+  }
+  h1.title .accent { color: var(--bleu); font-style: italic; }
+  .subtitle {
+    font-size: clamp(17px, 2.4vw, 21px); color: var(--ink-soft);
+    margin: 22px 0 0; max-width: 30ch;
+  }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px 15px; font-size: 14px; color: var(--ink-soft);
+    box-shadow: 0 1px 2px rgb(var(--shadow) / .04);
+  }
+  .chip b { color: var(--ink); font-weight: 600; }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--bleu); }
+  .chip.rose .dot { background: var(--framboise); }
+  .chip.or .dot { background: var(--or); }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 62px 0 8px; }
+  .sec-head { margin-bottom: 30px; }
+  .sec-num {
+    font-family: ui-monospace, Menlo, monospace; font-size: 13px; letter-spacing: .1em;
+    color: var(--framboise); font-weight: 600;
+  }
+  h2 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(27px, 5vw, 38px); line-height: 1.1;
+    margin: 8px 0 0; letter-spacing: -.01em; text-wrap: balance;
+  }
+  .sec-lede { color: var(--ink-soft); margin: 12px 0 0; max-width: 62ch; font-size: 16.5px; }
+
+  h3 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600; font-size: 20px; margin: 0 0 4px;
+  }
+
+  /* pronunciation grid */
+  .grid { display: grid; gap: 16px; }
+  .cards-2 { grid-template-columns: repeat(2, 1fr); }
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 720px) { .cards-2, .cards-3 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 22px 20px;
+    box-shadow: 0 1px 3px rgb(var(--shadow) / .05);
+  }
+  .card.rule { padding-left: 22px; position: relative; }
+  .card.rule::before {
+    content: ""; position: absolute; left: 0; top: 16px; bottom: 16px; width: 3px;
+    background: var(--bleu); border-radius: 0 3px 3px 0;
+  }
+  .card.rule.rose::before { background: var(--framboise); }
+
+  .sound-list { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 10px; }
+  .sound-list li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline; }
+  .spell {
+    font-family: ui-monospace, Menlo, monospace; font-weight: 600; color: var(--bleu);
+    background: color-mix(in srgb, var(--bleu) 10%, transparent);
+    padding: 2px 9px; border-radius: 7px; font-size: 15px; white-space: nowrap;
+    min-width: 62px; text-align: center;
+  }
+  .spell.rose { color: var(--framboise); background: color-mix(in srgb, var(--framboise) 12%, transparent); }
+  .say { color: var(--ink-soft); font-size: 15.5px; }
+  .say b { color: var(--ink); }
+
+  /* alphabet strip */
+  .alpha { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .letter {
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 9px;
+    padding: 8px 4px 6px; text-align: center; min-width: 52px; flex: 1 0 44px;
+  }
+  .letter .big { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 20px; font-weight: 600; }
+  .letter .nm { font-size: 11.5px; color: var(--ink-faint); font-family: ui-monospace, Menlo, monospace; }
+
+  /* roadmap timeline */
+  .timeline { display: grid; gap: 18px; }
+  .stage {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 24px 26px; position: relative; overflow: hidden;
+  }
+  .stage-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .stage-tag {
+    font-family: ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: #fff; background: var(--bleu); padding: 4px 11px; border-radius: 999px;
+  }
+  .stage:nth-child(1) .stage-tag { background: var(--framboise); }
+  .stage:nth-child(3) .stage-tag { background: var(--or); }
+  .stage:nth-child(4) .stage-tag { background: var(--ink); }
+  :root[data-theme="dark"] .stage:nth-child(4) .stage-tag,
+  @media (prefers-color-scheme: dark) { }
+  .stage-when { color: var(--ink-faint); font-size: 13.5px; font-family: ui-monospace, Menlo, monospace; }
+  .stage h3 { font-size: 22px; }
+  .stage p { margin: 8px 0 14px; color: var(--ink-soft); font-size: 16px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 13px; color: var(--ink-soft); background: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 7px; padding: 4px 10px;
+  }
+  .goal {
+    margin-top: 14px; font-size: 14.5px; color: var(--ink);
+    display: flex; gap: 9px; align-items: flex-start;
+  }
+  .goal .flag { color: var(--framboise); font-weight: 700; }
+
+  /* day plan */
+  .day {
+    display: grid; grid-template-columns: 84px 1fr; gap: 0;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  }
+  .day + .day { margin-top: 12px; }
+  .day .time {
+    background: var(--paper-2); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 16px 8px; border-right: 1px solid var(--line);
+  }
+  .day .time .n { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 26px; font-weight: 600; color: var(--bleu); line-height: 1; }
+  .day .time .u { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
+  .day .body { padding: 14px 20px; }
+  .day .body h4 { margin: 0 0 3px; font-size: 16.5px; }
+  .day .body p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+  /* resources */
+  .res-card h3 { display: flex; align-items: center; gap: 9px; }
+  .res-card h3 .ic { font-size: 20px; }
+  .res-card ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .res-card li { font-size: 15px; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; }
+  .res-card li .k { color: var(--ink); font-weight: 600; }
+  .res-card li .d { color: var(--ink-faint); font-size: 13.5px; }
+  .res-card li::before { content: "·"; color: var(--framboise); font-weight: 700; }
+
+  /* phrasebook */
+  .phrase-tbl { width: 100%; border-collapse: collapse; overflow: hidden; }
+  .phrase-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  .phrase-tbl th, .phrase-tbl td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+  .phrase-tbl thead th { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); font-weight: 600; background: var(--paper-2); }
+  .phrase-tbl tbody tr:last-child td { border-bottom: none; }
+  .phrase-tbl .fr { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-weight: 600; color: var(--bleu); white-space: nowrap; }
+  .phrase-tbl .ipa { font-family: ui-monospace, Menlo, monospace; color: var(--ink-faint); font-size: 13.5px; white-space: nowrap; }
+  .phrase-tbl .ru { color: var(--ink-soft); }
+
+  /* motivation / note */
+  .note {
+    background: linear-gradient(180deg, var(--card), var(--card-2));
+    border: 1px solid var(--line); border-radius: 18px; padding: 30px 30px 26px;
+    position: relative;
+  }
+  .note h2 { margin-top: 0; }
+  .note ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .note li { display: grid; grid-template-columns: auto 1fr; gap: 13px; font-size: 16px; color: var(--ink-soft); }
+  .note li b { color: var(--ink); }
+  .note li .num {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif; color: var(--framboise);
+    font-weight: 600; font-size: 18px; line-height: 1.4;
+  }
+
+  footer {
+    text-align: center; padding: 54px 22px 60px; color: var(--ink-faint);
+    border-top: 1px solid var(--line); margin-top: 62px;
+  }
+  footer .fr { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; font-size: 22px; color: var(--bleu); }
+  footer p { margin: 8px 0 0; font-size: 14px; }
+
+  .fade { opacity: 0; transform: translateY(14px); animation: rise .7s ease forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+</style>
+
+<header class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-margin"></div>
+  <div class="hero-inner fade">
+    <p class="eyebrow">Программа с нуля · для Эллины</p>
+    <h1 class="title">Le&nbsp;français,<br><span class="accent">à partir de zéro</span></h1>
+    <p class="subtitle serif">Персональный маршрут: от звуков и букв — до живого разговора и любимого французского кино.</p>
+    <div class="meta-row">
+      <span class="chip"><span class="dot"></span> Цель: <b>путешествия&nbsp;+&nbsp;для&nbsp;души</b></span>
+      <span class="chip rose"><span class="dot"></span> Темп: <b>1&nbsp;час&nbsp;в&nbsp;день</b></span>
+      <span class="chip or"><span class="dot"></span> Старт: <b>произношение&nbsp;→&nbsp;грамматика</b></span>
+      <span class="chip"><span class="dot"></span> Горизонт: <b>A2 за 6 месяцев</b></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- POURQUOI -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">00 · как устроена программа</span>
+      <h2>Почему сначала звуки, а не слова</h2>
+      <p class="sec-lede">Французский пишется одним, а звучит совсем другим: <span class="mono">Paris</span> → «Пари», <span class="mono">beaucoup</span> → «боку». Если сразу зубрить слова «как написано» — потом придётся переучиваться. Поэтому первые 2 недели мы разбираемся <b>как буквы превращаются в звуки</b>. После этого ты сможешь прочитать вслух любое незнакомое слово — и дальше грамматика ляжет легко.</p>
+    </div>
+    <div class="grid cards-3">
+      <div class="card">
+        <h3 class="serif">1. Слышать</h3>
+        <p style="margin:6px 0 0;color:var(--ink-soft);font-size:15px;">Ухо привыкает к носовым звукам и мелодии речи. Каждый день — немного аудио.</p>
+      </div>
+      <div class="card">
+        <h3 class="serif">2. Читать вслух</h3>
+        <p style="margin:6px 0 0;color:var(--ink-soft);font-size:15px;">Знаешь правила чтения — не боишься текста. Проговариваешь, а не молчишь.</p>
+      </div>
+      <div class="card">
+        <h3 class="serif">3. Собирать фразы</h3>
+        <p style="margin:6px 0 0;color:var(--ink-soft);font-size:15px;">Грамматика приходит через готовые фразы для кафе, улицы, знакомства.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALPHABET + SOUNDS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01 · этап 0 · недели 1–2</span>
+      <h2>Звуки и буквы — фундамент</h2>
+      <p class="sec-lede">Самое важное. Это шпаргалка, к которой возвращаешься весь первый месяц. Не надо учить наизусть — надо понять логику и держать под рукой.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <h3 class="serif">Алфавит — 26 букв (как называются)</h3>
+      <div class="alpha" style="margin-top:14px;">
+        <div class="letter"><div class="big">A</div><div class="nm">а</div></div>
+        <div class="letter"><div class="big">B</div><div class="nm">бэ</div></div>
+        <div class="letter"><div class="big">C</div><div class="nm">сэ</div></div>
+        <div class="letter"><div class="big">D</div><div class="nm">дэ</div></div>
+        <div class="letter"><div class="big">E</div><div class="nm">ё</div></div>
+        <div class="letter"><div class="big">F</div><div class="nm">эф</div></div>
+        <div class="letter"><div class="big">G</div><div class="nm">жэ</div></div>
+        <div class="letter"><div class="big">H</div><div class="nm">аш</div></div>
+        <div class="letter"><div class="big">I</div><div class="nm">и</div></div>
+        <div class="letter"><div class="big">J</div><div class="nm">жи</div></div>
+        <div class="letter"><div class="big">K</div><div class="nm">ка</div></div>
+        <div class="letter"><div class="big">L</div><div class="nm">эль</div></div>
+        <div class="letter"><div class="big">M</div><div class="nm">эм</div></div>
+        <div class="letter"><div class="big">N</div><div class="nm">эн</div></div>
+        <div class="letter"><div class="big">O</div><div class="nm">о</div></div>
+        <div class="letter"><div class="big">P</div><div class="nm">пэ</div></div>
+        <div class="letter"><div class="big">Q</div><div class="nm">кю</div></div>
+        <div class="letter"><div class="big">R</div><div class="nm">эр</div></div>
+        <div class="letter"><div class="big">S</div><div class="nm">эс</div></div>
+        <div class="letter"><div class="big">T</div><div class="nm">тэ</div></div>
+        <div class="letter"><div class="big">U</div><div class="nm">ю</div></div>
+        <div class="letter"><div class="big">V</div><div class="nm">вэ</div></div>
+        <div class="letter"><div class="big">W</div><div class="nm">дубль-вэ</div></div>
+        <div class="letter"><div class="big">X</div><div class="nm">икс</div></div>
+        <div class="letter"><div class="big">Y</div><div class="nm">игрек</div></div>
+        <div class="letter"><div class="big">Z</div><div class="nm">зэд</div></div>
+      </div>
+    </div>
+
+    <div class="grid cards-2">
+      <div class="card rule">
+        <h3 class="serif">Гласные-сочетания</h3>
+        <ul class="sound-list">
+          <li><span class="spell">ou</span><span class="say">= <b>у</b> · <span class="mono">bonjour</span> → бонжу<b>р</b></span></li>
+          <li><span class="spell">u</span><span class="say">= <b>ю</b> (губы трубочкой) · <span class="mono">tu</span> → тю</span></li>
+          <li><span class="spell">oi</span><span class="say">= <b>уа</b> · <span class="mono">moi</span> → муа</span></li>
+          <li><span class="spell">eau·au</span><span class="say">= <b>о</b> · <span class="mono">beau</span> → бо</span></li>
+          <li><span class="spell">ai·ei</span><span class="say">= <b>э</b> · <span class="mono">maison</span> → мэзо́н</span></li>
+          <li><span class="spell">eu·œu</span><span class="say">= <b>ё</b> · <span class="mono">deux</span> → дё</span></li>
+        </ul>
+      </div>
+
+      <div class="card rule rose">
+        <h3 class="serif">Носовые звуки «в нос»</h3>
+        <ul class="sound-list">
+          <li><span class="spell rose">an·en</span><span class="say">= <b>а(н)</b> в нос · <span class="mono">France</span> → фра́нс</span></li>
+          <li><span class="spell rose">on</span><span class="say">= <b>о(н)</b> в нос · <span class="mono">bonjour</span> → бо́нжур</span></li>
+          <li><span class="spell rose">in·ain</span><span class="say">= <b>э(н)</b> в нос · <span class="mono">vin</span> → вэ(н)</span></li>
+          <li><span class="spell rose">un</span><span class="say">= <b>ё(н)</b> в нос · <span class="mono">un</span> → ё(н)</span></li>
+        </ul>
+        <p style="margin:14px 0 0;font-size:13.5px;color:var(--ink-faint);">Носовой — это когда «н» почти не слышно, звук идёт через нос. Главная фишка французского.</p>
+      </div>
+
+      <div class="card rule">
+        <h3 class="serif">Согласные и сочетания</h3>
+        <ul class="sound-list">
+          <li><span class="spell">ch</span><span class="say">= <b>ш</b> · <span class="mono">chat</span> → ша</span></li>
+          <li><span class="spell">j · g</span><span class="say">= <b>ж</b> (g перед e,i) · <span class="mono">jour</span> → жур</span></li>
+          <li><span class="spell">gn</span><span class="say">= <b>нь</b> · <span class="mono">champagne</span> → шампань</span></li>
+          <li><span class="spell">qu</span><span class="say">= <b>к</b> · <span class="mono">qui</span> → ки</span></li>
+          <li><span class="spell">c</span><span class="say">= <b>с</b> перед e,i,y; иначе <b>к</b></span></li>
+          <li><span class="spell">ç</span><span class="say">= всегда <b>с</b> · <span class="mono">ça</span> → са</span></li>
+          <li><span class="spell">r</span><span class="say">= гортанное <b>«р»</b> из горла (грассируем)</span></li>
+          <li><span class="spell">h</span><span class="say">= <b>никогда не читается</b></span></li>
+        </ul>
+      </div>
+
+      <div class="card rule rose">
+        <h3 class="serif">Немые буквы и связки</h3>
+        <ul class="sound-list">
+          <li><span class="spell rose">-e</span><span class="say">на конце — молчит · <span class="mono">France</span> → франс</span></li>
+          <li><span class="spell rose">-s -t -d -x</span><span class="say">на конце обычно молчат · <span class="mono">Paris</span> → пари</span></li>
+          <li><span class="spell rose">-er -ez</span><span class="say">на конце = <b>э</b> · <span class="mono">parler</span> → парле</span></li>
+          <li><span class="spell rose">liaison</span><span class="say">немая согласная «оживает» перед гласной · <span class="mono">les&nbsp;amis</span> → ле-<b>з</b>-ами</span></li>
+        </ul>
+        <p style="margin:14px 0 0;font-size:13.5px;color:var(--ink-faint);">Правило C-a-R-e-F-u-L: чаще всего читаются конечные <b>c, r, f, l</b>.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3 class="serif">Значки над буквами (accents)</h3>
+      <ul class="sound-list" style="grid-template-columns:none;">
+        <li><span class="spell">é</span><span class="say"><b>accent aigu</b> — закрытое «э/эй» · <span class="mono">café</span> → кафе</span></li>
+        <li><span class="spell">è ê</span><span class="say"><b>grave / circonflexe</b> — открытое «э» · <span class="mono">père</span> → пэр</span></li>
+        <li><span class="spell">ç</span><span class="say"><b>cédille</b> — превращает c в «с»</span></li>
+        <li><span class="spell">ë ï</span><span class="say"><b>tréma</b> — читаем буквы отдельно · <span class="mono">Noël</span> → но-эль</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02 · маршрут на 6 месяцев</span>
+      <h2>Четыре этапа — от букв к разговору</h2>
+      <p class="sec-lede">Каждый этап заканчивается понятной маленькой победой. Не спеши: лучше твёрдо пройти этап, чем бежать вперёд.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="stage">
+        <div class="stage-top">
+          <span class="stage-tag">Этап 0</span>
+          <span class="stage-when">недели 1–2</span>
+        </div>
+        <h3 class="serif">Звуки и буквы</h3>
+        <p>Разбираем шпаргалку выше. Учимся читать вслух и слышать носовые. Никакой спешки со словами — только звук ↔ буква.</p>
+        <div class="tags">
+          <span class="tag">алфавит</span><span class="tag">правила чтения</span><span class="tag">носовые</span><span class="tag">accents</span><span class="tag">грассированное R</span><span class="tag">liaison</span>
+        </div>
+        <p class="goal"><span class="flag">→ победа:</span> открываешь любое слово и читаешь его вслух правильно.</p>
+      </div>
+
+      <div class="stage">
+        <div class="stage-top">
+          <span class="stage-tag">Этап 1</span>
+          <span class="stage-when">недели 3–6 · уровень A1</span>
+        </div>
+        <h3 class="serif">Первые фразы о себе</h3>
+        <p>Приветствия, вежливость, знакомство. Два главных глагола <span class="mono">être</span> (быть) и <span class="mono">avoir</span> (иметь), артикли, числа, настоящее время глаголов на -er.</p>
+        <div class="tags">
+          <span class="tag">bonjour / merci</span><span class="tag">je m'appelle…</span><span class="tag">être · avoir</span><span class="tag">le / la / un / une</span><span class="tag">числа 0–100</span><span class="tag">вопросы</span>
+        </div>
+        <p class="goal"><span class="flag">→ победа:</span> можешь представиться, поздороваться и назвать числа.</p>
+      </div>
+
+      <div class="stage">
+        <div class="stage-top">
+          <span class="stage-tag">Этап 2</span>
+          <span class="stage-when">недели 7–12 · A1 → A2</span>
+        </div>
+        <h3 class="serif">Выживание в путешествии</h3>
+        <p>Твоя главная цель. Кафе и ресторан, магазин и цены, отель, город и транспорт, «как пройти». Ближайшее будущее <span class="mono">aller + инфинитив</span> и первое прошедшее <span class="mono">passé composé</span>.</p>
+        <div class="tags">
+          <span class="tag">заказать в кафе</span><span class="tag">покупки и цены</span><span class="tag">отель · бронь</span><span class="tag">направления</span><span class="tag">aller · faire · venir</span><span class="tag">futur proche</span>
+        </div>
+        <p class="goal"><span class="flag">→ победа:</span> проходишь целую поездку — кафе, магазин, отель — по-французски.</p>
+      </div>
+
+      <div class="stage">
+        <div class="stage-top">
+          <span class="stage-tag">Этап 3</span>
+          <span class="stage-when">месяцы 4–6 · уровень A2</span>
+        </div>
+        <h3 class="serif">Разговор и культура</h3>
+        <p>Рассказываешь о себе, о работе веб-дизайнером, о планах. Прошлое и настроения. И — то, ради чего всё: смотришь французское кино и слушаешь песни, понимая всё больше.</p>
+        <div class="tags">
+          <span class="tag">о себе и работе</span><span class="tag">passé composé + imparfait</span><span class="tag">мнения и чувства</span><span class="tag">кино с субтитрами</span><span class="tag">песни</span><span class="tag">живой разговор</span>
+        </div>
+        <p class="goal"><span class="flag">→ победа:</span> смотришь «Амели» с французскими субтитрами и ловишь фразы.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY PLAN -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03 · твой час каждый день</span>
+      <h2>Как разложить 1 час</h2>
+      <p class="sec-lede">Час — это много и легко перегореть. Поэтому делим на 4 коротких блока со сменой формата: голова не устаёт, и задействованы и глаза, и уши, и рот. Порядок можно менять под настроение.</p>
+    </div>
+
+    <div class="day">
+      <div class="time"><div class="n">20</div><div class="u">мин</div></div>
+      <div class="body"><h4>Грамматика · новое правило</h4><p>Учебник или ролик на YouTube: одна тема за раз. Записываешь пример себе в тетрадь (ты же визуал — рисуй схемы и цветом!).</p></div>
+    </div>
+    <div class="day">
+      <div class="time"><div class="n">15</div><div class="u">мин</div></div>
+      <div class="body"><h4>Слова · карточки</h4><p>Anki или Quizlet с картинками. 7–10 новых слов в день. Визуальные карточки «слово ↔ картинка» — идеально под тебя.</p></div>
+    </div>
+    <div class="day">
+      <div class="time"><div class="n">15</div><div class="u">мин</div></div>
+      <div class="body"><h4>Слушать</h4><p>Подкаст для начинающих или французская песня с текстом. Задача не понять всё, а привыкнуть к звучанию.</p></div>
+    </div>
+    <div class="day">
+      <div class="time"><div class="n">10</div><div class="u">мин</div></div>
+      <div class="body"><h4>Говорить вслух</h4><p>Повторяешь за диктором (shadowing), проверяешь слова на Forvo. Не молчи — рот тоже надо тренировать.</p></div>
+    </div>
+    <p style="margin-top:16px;font-size:14.5px;color:var(--ink-faint);">Нет часа? Минимум — <b style="color:var(--framboise)">20 минут карточек + аудио</b>. Регулярность важнее объёма: каждый день по чуть-чуть &gt; раз в неделю помногу.</p>
+  </section>
+
+  <!-- RESOURCES -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04 · твой набор инструментов</span>
+      <h2>Ресурсы под тебя — визуал + аудио + культура</h2>
+      <p class="sec-lede">Подобрано под визуала, который учится с нуля и любит французскую эстетику. Начни с 1–2 приложений, не хватай всё сразу.</p>
+    </div>
+    <div class="grid cards-2">
+      <div class="card res-card">
+        <h3 class="serif"><span class="ic">📱</span> Приложения — каждый день</h3>
+        <ul>
+          <li><span class="k">Duolingo</span><span><span class="d">геймификация, серии, лёгкий вход — держит привычку</span></span></li>
+          <li><span class="k">Busuu / LingQ</span><span><span class="d">когда захочешь глубже, чем Duolingo</span></span></li>
+          <li><span class="k">Anki · Quizlet</span><span><span class="d">визуальные карточки со словами и картинками</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <h3 class="serif"><span class="ic">🔊</span> Произношение</h3>
+        <ul>
+          <li><span class="k">Forvo</span><span><span class="d">носители произносят любое слово вслух</span></span></li>
+          <li><span class="k">YouGlish (French)</span><span><span class="d">слово в живых видео — как звучит в речи</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <h3 class="serif"><span class="ic">▶️</span> YouTube-каналы</h3>
+        <ul>
+          <li><span class="k">Français avec Pierre</span><span><span class="d">объясняет грамматику просто, с нуля</span></span></li>
+          <li><span class="k">Piece of French</span><span><span class="d">медленно и по-доброму для начинающих</span></span></li>
+          <li><span class="k">InnerFrench</span><span><span class="d">чуть позже, для этапа A2 — только по-французски</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <h3 class="serif"><span class="ic">🎧</span> Подкасты — в дорогу</h3>
+        <ul>
+          <li><span class="k">Coffee Break French</span><span><span class="d">лучший старт с нуля, по урокам</span></span></li>
+          <li><span class="k">Duolingo French Podcast</span><span><span class="d">истории, половина на английском/простом</span></span></li>
+          <li><span class="k">One Thing in a French Day</span><span><span class="d">короткие зарисовки из жизни Парижа</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <h3 class="serif"><span class="ic">🎵</span> Музыка — для души</h3>
+        <ul>
+          <li><span class="k">ZAZ · Angèle · Clara Luciani</span><span><span class="d">современно, чёткая дикция</span></span></li>
+          <li><span class="k">Stromae · Pomme</span><span><span class="d">красивый текст, легко подпевать</span></span></li>
+          <li><span class="k">Édith Piaf</span><span><span class="d">классика — «La Vie en rose»</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <h3 class="serif"><span class="ic">🎬</span> Кино и сериалы</h3>
+        <ul>
+          <li><span class="k">Амели</span><span><span class="d">твоя цель-мечта, к этапу 3</span></span></li>
+          <li><span class="k">Dix pour cent</span><span><span class="d">«В агентстве» — живой современный язык</span></span></li>
+          <li><span class="k">Lupin · Emily in Paris</span><span><span class="d">смотри с французскими субтитрами</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:14.5px;color:var(--ink-faint);">Словари-помощники: <b style="color:var(--ink)">WordReference</b>, <b style="color:var(--ink)">Larousse</b>, <b style="color:var(--ink)">Reverso Context</b> (показывает слово в живых примерах).</p>
+  </section>
+
+  <!-- PHRASEBOOK -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05 · с чего говорить прямо сейчас</span>
+      <h2>15 фраз на первый день</h2>
+      <p class="sec-lede">Можешь выучить их уже сегодня — это готовые кирпичики для кафе, улицы и знакомства. В скобках — как примерно звучит.</p>
+    </div>
+    <div class="phrase-wrap">
+      <table class="phrase-tbl">
+        <thead>
+          <tr><th>Français</th><th>Звучит</th><th>По-русски</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="fr">Bonjour</td><td class="ipa">бонжу́р</td><td class="ru">Здравствуйте / Добрый день</td></tr>
+          <tr><td class="fr">Bonsoir</td><td class="ipa">бонсуа́р</td><td class="ru">Добрый вечер</td></tr>
+          <tr><td class="fr">Merci (beaucoup)</td><td class="ipa">мерси́ (боку́)</td><td class="ru">Спасибо (большое)</td></tr>
+          <tr><td class="fr">S'il vous plaît</td><td class="ipa">силь ву пле́</td><td class="ru">Пожалуйста (просьба)</td></tr>
+          <tr><td class="fr">Pardon / Excusez-moi</td><td class="ipa">пардо́н / экскюзе́-муа́</td><td class="ru">Извините</td></tr>
+          <tr><td class="fr">Oui / Non</td><td class="ipa">уи́ / но(н)</td><td class="ru">Да / Нет</td></tr>
+          <tr><td class="fr">Je m'appelle Ellina</td><td class="ipa">жё мапе́ль…</td><td class="ru">Меня зовут Эллина</td></tr>
+          <tr><td class="fr">Enchantée</td><td class="ipa">аншанте́</td><td class="ru">Приятно познакомиться</td></tr>
+          <tr><td class="fr">Je ne parle pas français</td><td class="ipa">жё нё парль па франсэ́</td><td class="ru">Я не говорю по-французски</td></tr>
+          <tr><td class="fr">Parlez-vous anglais ?</td><td class="ipa">парле́-ву англе́?</td><td class="ru">Вы говорите по-английски?</td></tr>
+          <tr><td class="fr">Je voudrais…</td><td class="ipa">жё вудрэ́…</td><td class="ru">Я хотела бы…</td></tr>
+          <tr><td class="fr">L'addition, s'il vous plaît</td><td class="ipa">лядисьо́н силь ву пле́</td><td class="ru">Счёт, пожалуйста</td></tr>
+          <tr><td class="fr">Combien ça coûte ?</td><td class="ipa">комбьё(н) са кут?</td><td class="ru">Сколько это стоит?</td></tr>
+          <tr><td class="fr">Où sont les toilettes ?</td><td class="ipa">у со(н) ле туале́т?</td><td class="ru">Где туалет?</td></tr>
+          <tr><td class="fr">Au revoir</td><td class="ipa">о ревуа́р</td><td class="ru">До свидания</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MOTIVATION -->
+  <section>
+    <div class="note">
+      <span class="sec-num">06 · чтобы не бросить</span>
+      <h2>Пять правил, чтобы дойти</h2>
+      <ul>
+        <li><span class="num">1</span><span><b>Каждый день, пусть по чуть-чуть.</b> Серия из 20-минуток бьёт один марафон в неделю. Мозг учит язык привычкой, а не подвигом.</span></li>
+        <li><span class="num">2</span><span><b>Не бойся ошибок и не гонись за идеальным произношением.</b> Твоя цель — понимать и объясниться, а не сдавать экзамен.</span></li>
+        <li><span class="num">3</span><span><b>Привяжи к удовольствию.</b> Одна французская песня или серия в день — это тоже учёба, и самая приятная.</span></li>
+        <li><span class="num">4</span><span><b>Окружи себя языком.</b> Подпиши стикерами предметы дома: <span class="mono">la porte</span> (дверь), <span class="mono">la fenêtre</span> (окно). Ты визуал — тебе зайдёт.</span></li>
+        <li><span class="num">5</span><span><b>Отмечай победы.</b> Прочитала вывеску, поняла фразу в песне — это прогресс. Хвали себя, а не ругай за забытое.</span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="fr">Bon courage, Ellina&nbsp;! Petit à petit, l'oiseau fait son nid.</div>
+  <p>«Мало-помалу птичка вьёт гнездо» — французская пословица про то, что важен каждый маленький шаг.</p>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var secs = document.querySelectorAll("section");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("fade"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    secs.forEach(function (s) { io.observe(s); });
+  });
+</script>

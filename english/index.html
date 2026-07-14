@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English for travel &amp; life — программа для Эллины</title>
+<style>
+  :root {
+    --paper: #F6F2E8;
+    --paper-2: #EDE7D8;
+    --ink: #1B2A31;
+    --ink-soft: #46565E;
+    --ink-faint: #8A8578;
+    --line: #DAD2BF;
+    --teal: #1F6F6B;
+    --teal-bright: #2A8C87;
+    --amber: #C9871C;
+    --red: #BE3B2C;
+    --card: #FFFDF7;
+    --card-2: #FBF7EC;
+    --shadow: 27 42 49;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12191C; --paper-2: #18232700; --paper-2: #182327; --ink: #EEF2EE;
+      --ink-soft: #AEBAB8; --ink-faint: #7C837C; --line: #2A3639;
+      --teal: #5CC2BB; --teal-bright: #74D4CD; --amber: #E4A742; --red: #E76A5B;
+      --card: #182225; --card-2: #141C1F; --shadow: 0 0 0;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F6F2E8; --paper-2: #EDE7D8; --ink: #1B2A31; --ink-soft: #46565E;
+    --ink-faint: #8A8578; --line: #DAD2BF; --teal: #1F6F6B; --teal-bright: #2A8C87;
+    --amber: #C9871C; --red: #BE3B2C; --card: #FFFDF7; --card-2: #FBF7EC; --shadow: 27 42 49;
+  }
+  :root[data-theme="dark"] {
+    --paper: #12191C; --paper-2: #182327; --ink: #EEF2EE; --ink-soft: #AEBAB8;
+    --ink-faint: #7C837C; --line: #2A3639; --teal: #5CC2BB; --teal-bright: #74D4CD;
+    --amber: #E4A742; --red: #E76A5B; --card: #182225; --card-2: #141C1F; --shadow: 0 0 0;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6; font-size: 17px; overflow-x: hidden;
+  }
+  .display {
+    font-family: "Helvetica Neue", "Arial Narrow", system-ui, sans-serif;
+    font-weight: 800; letter-spacing: -.02em;
+  }
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 22px; }
+
+  /* ---- HERO: departure-board ---- */
+  .hero { position: relative; padding: 70px 22px 54px; border-bottom: 2px dashed var(--line); overflow: hidden; }
+  .hero-in { max-width: 920px; margin: 0 auto; position: relative; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--red);
+    background: color-mix(in srgb, var(--red) 10%, transparent); padding: 6px 13px; border-radius: 6px;
+    margin: 0 0 22px;
+  }
+  .kicker .stamp { font-size: 15px; }
+  h1.title {
+    font-family: "Helvetica Neue", "Arial Narrow", system-ui, sans-serif;
+    font-weight: 800; font-size: clamp(40px, 9vw, 88px); line-height: .95;
+    letter-spacing: -.03em; text-transform: uppercase; margin: 0; text-wrap: balance;
+  }
+  h1.title .amber { color: var(--amber); }
+  h1.title .teal { color: var(--teal); }
+  .subtitle { font-size: clamp(17px, 2.4vw, 21px); color: var(--ink-soft); margin: 22px 0 0; max-width: 40ch; }
+  .board {
+    margin-top: 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+  }
+  .board .cell { background: var(--card); padding: 15px 17px; }
+  .board .cell .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-faint); font-weight: 700; }
+  .board .cell .v { font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; font-weight: 800; font-size: 18px; margin-top: 4px; letter-spacing: -.01em; }
+  .board .cell .v.a { color: var(--amber); }
+  .board .cell .v.t { color: var(--teal); }
+
+  section { padding: 58px 0 6px; }
+  .sec-head { margin-bottom: 26px; }
+  .sec-num { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; letter-spacing: .1em; color: var(--red); font-weight: 700; text-transform: uppercase; }
+  h2 { font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; font-weight: 800; font-size: clamp(26px, 5vw, 40px); line-height: 1.05; text-transform: uppercase; letter-spacing: -.02em; margin: 8px 0 0; text-wrap: balance; }
+  .sec-lede { color: var(--ink-soft); margin: 12px 0 0; max-width: 64ch; font-size: 16.5px; }
+  h3 { font-weight: 700; font-size: 19px; margin: 0 0 4px; }
+
+  .grid { display: grid; gap: 16px; }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .cols-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 720px) { .cols-3, .cols-2 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 20px; box-shadow: 0 1px 3px rgb(var(--shadow) / .05); }
+  .card .ic { font-size: 26px; display: block; margin-bottom: 8px; }
+  .card p { margin: 6px 0 0; color: var(--ink-soft); font-size: 15px; }
+
+  /* focus priority cards */
+  .prio { border-left: 4px solid var(--teal); }
+  .prio:nth-child(2) { border-left-color: var(--amber); }
+  .prio:nth-child(3) { border-left-color: var(--red); }
+  .prio .rank { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink-faint); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+  /* roadmap boarding passes */
+  .phases { display: grid; gap: 16px; }
+  .phase { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 96px 1fr; }
+  @media (max-width: 620px) { .phase { grid-template-columns: 1fr; } }
+  .phase .stub {
+    background: var(--teal); color: #fff; padding: 20px 14px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center; border-right: 2px dashed color-mix(in srgb, #fff 45%, transparent);
+  }
+  .phase:nth-child(2) .stub { background: var(--amber); }
+  .phase:nth-child(3) .stub { background: var(--red); }
+  .phase:nth-child(4) .stub { background: var(--ink); }
+  @media (max-width: 620px) { .phase .stub { border-right: none; border-bottom: 2px dashed color-mix(in srgb, #fff 45%, transparent); flex-direction: row; gap: 10px; } }
+  .phase .stub .ph { font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: .1em; opacity: .85; }
+  .phase .stub .big { font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; font-weight: 800; font-size: 30px; line-height: 1; margin-top: 3px; }
+  .phase .content { padding: 22px 24px; }
+  .phase .content .when { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; color: var(--ink-faint); }
+  .phase .content h3 { font-size: 21px; margin: 4px 0 0; }
+  .phase .content p { margin: 8px 0 12px; color: var(--ink-soft); font-size: 15.5px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag { font-size: 13px; color: var(--ink-soft); background: var(--paper-2); border: 1px solid var(--line); border-radius: 7px; padding: 4px 10px; }
+  .win { margin-top: 12px; font-size: 14.5px; display: flex; gap: 8px; align-items: baseline; }
+  .win b { color: var(--teal); }
+
+  /* day plan */
+  .slots { display: grid; gap: 12px; }
+  .slot { display: grid; grid-template-columns: 76px 1fr; background: var(--card); border: 1px solid var(--line); border-radius: 13px; overflow: hidden; }
+  .slot .t { background: var(--paper-2); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 6px; border-right: 1px solid var(--line); }
+  .slot .t .n { font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; font-weight: 800; font-size: 24px; color: var(--teal); line-height: 1; }
+  .slot .t .u { font-size: 10.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
+  .slot .b { padding: 13px 18px; }
+  .slot .b h4 { margin: 0 0 2px; font-size: 16px; }
+  .slot .b p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+  /* grammar checklist */
+  .check { columns: 2; column-gap: 16px; }
+  @media (max-width: 640px) { .check { columns: 1; } }
+  .check .item { break-inside: avoid; background: var(--card); border: 1px solid var(--line); border-radius: 11px; padding: 13px 15px; margin-bottom: 12px; display: grid; grid-template-columns: auto 1fr; gap: 11px; }
+  .check .box { width: 18px; height: 18px; border: 2px solid var(--teal); border-radius: 5px; margin-top: 3px; flex: none; }
+  .check .item .en { font-weight: 700; }
+  .check .item .en .mono { color: var(--teal); font-weight: 600; font-size: 14px; }
+  .check .item .ru { color: var(--ink-soft); font-size: 14px; display: block; margin-top: 2px; }
+
+  /* resources */
+  .res-card ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .res-card li { font-size: 15px; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; }
+  .res-card li::before { content: "→"; color: var(--amber); font-weight: 700; }
+  .res-card li .k { color: var(--ink); font-weight: 700; }
+  .res-card li .d { color: var(--ink-faint); font-size: 13px; }
+
+  /* phrasebook */
+  .pb-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table.pb { width: 100%; border-collapse: collapse; }
+  table.pb th, table.pb td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+  table.pb thead th { font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); background: var(--paper-2); font-weight: 700; }
+  table.pb tbody tr:last-child td { border-bottom: none; }
+  table.pb .grp td { background: var(--paper-2); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--teal); font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; }
+  table.pb .en { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  table.pb .ru { color: var(--ink-soft); }
+
+  .note { background: linear-gradient(180deg, var(--card), var(--card-2)); border: 1px solid var(--line); border-radius: 18px; padding: 30px 30px 26px; }
+  .note h2 { margin-top: 6px; }
+  .note ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .note li { display: grid; grid-template-columns: auto 1fr; gap: 13px; font-size: 16px; color: var(--ink-soft); }
+  .note li b { color: var(--ink); }
+  .note .num { font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; color: var(--red); font-weight: 800; font-size: 20px; }
+
+  footer { text-align: center; padding: 52px 22px 58px; color: var(--ink-faint); border-top: 2px dashed var(--line); margin-top: 58px; }
+  footer .big { font-family: "Helvetica Neue","Arial Narrow",system-ui,sans-serif; font-weight: 800; font-size: 22px; color: var(--teal); text-transform: uppercase; letter-spacing: -.01em; }
+  footer p { margin: 8px 0 0; font-size: 14px; }
+
+  .fade { opacity: 0; transform: translateY(13px); animation: rise .65s ease forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in fade">
+    <span class="kicker"><span class="stamp">✦</span> Программа под тебя · Эллина</span>
+    <h1 class="title">English<br>for <span class="amber">travel</span> &amp; <span class="teal">life</span></h1>
+    <p class="subtitle">Ты уже можешь объясниться просто. Дальше — не учить заново, а <b>разговориться</b> и <b>начать понимать на слух</b>. Программа именно про это.</p>
+    <div class="board">
+      <div class="cell"><div class="k">Старт</div><div class="v">A2 → B1</div></div>
+      <div class="cell"><div class="k">Цель</div><div class="v a">Путешествия и жизнь</div></div>
+      <div class="cell"><div class="k">Темп</div><div class="v">30–40 мин/день</div></div>
+      <div class="cell"><div class="k">Финиш</div><div class="v t">Уверенный B1</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- POURQUOI -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01 · как устроена программа</span>
+      <h2>Не с нуля, а «разговориться»</h2>
+      <p class="sec-lede">У тебя уже есть база — ты понимаешь и можешь сказать простое. Это меняет всё: тратить время на алфавит и «то be» заново — бессмысленно. Твои три настоящие задачи ниже. На них и делаем упор.</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="card prio">
+        <span class="rank">Приоритет 1</span>
+        <h3>👂 Понимать на слух</h3>
+        <p>Самое сложное на твоём уровне. Ухо надо тренировать каждый день — подкасты, сериалы, живая речь. Без этого в поездке «теряешься».</p>
+      </div>
+      <div class="card prio">
+        <span class="rank">Приоритет 2</span>
+        <h3>🗣 Говорить без ступора</h3>
+        <p>Ты знаешь больше, чем говоришь — мешает страх ошибиться. Задача: говорить много и не бояться. Идеально не нужно, нужно понятно.</p>
+      </div>
+      <div class="card prio">
+        <span class="rank">Приоритет 3</span>
+        <h3>🧩 Закрыть пробелы</h3>
+        <p>Подтянуть времена и предлоги, где путаешься, и добрать лексику по темам поездок. Точечно, а не «вся грамматика подряд».</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02 · маршрут на ~4–5 месяцев</span>
+      <h2>Четыре посадочных талона</h2>
+      <p class="sec-lede">Каждая фаза заканчивается понятной победой. Двигаемся от «уверенной базы» к свободному бытовому общению уровня B1.</p>
+    </div>
+    <div class="phases">
+
+      <div class="phase">
+        <div class="stub"><div><div class="ph">Фаза</div><div class="big">1</div></div></div>
+        <div class="content">
+          <div class="when">недели 1–4 · активируем базу</div>
+          <h3>Разговорный фундамент</h3>
+          <p>Оживляем то, что уже знаешь. Наводим порядок в главных временах и учим «фразы-кирпичики» для повседневных ситуаций. Каждый день — короткое аудио, чтобы привыкло ухо.</p>
+          <div class="tags"><span class="tag">Present Simple / Continuous</span><span class="tag">Past Simple</span><span class="tag">will / going to</span><span class="tag">вежливые просьбы</span><span class="tag">small talk</span></div>
+          <div class="win">🎯 <span><b>победа:</b> уверенно рассказываешь о себе, дне и планах простыми фразами.</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="stub"><div><div class="ph">Фаза</div><div class="big">2</div></div></div>
+        <div class="content">
+          <div class="when">недели 5–9 · твоя главная цель</div>
+          <h3>Английский в путешествии</h3>
+          <p>Отрабатываем реальные сцены поездки: аэропорт, отель, транспорт, кафе, магазины, «как пройти» и решение проблем. Present Perfect для «I've been to…».</p>
+          <div class="tags"><span class="tag">аэропорт · регистрация</span><span class="tag">отель · заселение</span><span class="tag">кафе · заказ</span><span class="tag">направления</span><span class="tag">Present Perfect</span><span class="tag">решаем проблемы</span></div>
+          <div class="win">🎯 <span><b>победа:</b> проходишь всю поездку на английском и не теряешься, если что-то пошло не так.</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="stub"><div><div class="ph">Фаза</div><div class="big">3</div></div></div>
+        <div class="content">
+          <div class="when">недели 10–14 · свободнее и живее</div>
+          <h3>Беглость и слух</h3>
+          <p>Учимся выражать мнение, чувства, планы. Условные предложения (if…), полезные phrasal verbs. Много слушаем сериалы и подкасты — понимание на слух выходит на новый уровень.</p>
+          <div class="tags"><span class="tag">мнения и чувства</span><span class="tag">conditionals (if)</span><span class="tag">phrasal verbs</span><span class="tag">сериалы с субтитрами</span><span class="tag">беглость</span></div>
+          <div class="win">🎯 <span><b>победа:</b> смотришь сериал с английскими субтитрами и понимаешь основное.</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="stub"><div><div class="ph">Фаза</div><div class="big">4</div></div></div>
+        <div class="content">
+          <div class="when">недели 15+ · закрепляем B1</div>
+          <h3>Живое общение</h3>
+          <p>Регулярные разговоры с носителями/партнёрами по языку, свободные темы: работа-дизайн, хобби, путешествия, истории. Речь становится автоматической.</p>
+          <div class="tags"><span class="tag">разговоры с носителями</span><span class="tag">о работе и дизайне</span><span class="tag">рассказать историю</span><span class="tag">спонтанная речь</span></div>
+          <div class="win">🎯 <span><b>победа:</b> поддерживаешь живой разговор на бытовые темы без паники — уровень B1.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03 · твои 30–40 минут в день</span>
+      <h2>Как разложить занятие</h2>
+      <p class="sec-lede">Упор на слух и речь — то, что тебе реально нужно. Грамматика фоном, по чуть-чуть. Порядок можно менять.</p>
+    </div>
+    <div class="slots">
+      <div class="slot"><div class="t"><div class="n">15</div><div class="u">мин</div></div><div class="b"><h4>👂 Слушать</h4><p>Подкаст для среднего уровня или отрывок сериала. Сначала с субтитрами, потом без. Каждый день — это ключ.</p></div></div>
+      <div class="slot"><div class="t"><div class="n">10</div><div class="u">мин</div></div><div class="b"><h4>🗣 Говорить вслух</h4><p>Проговаривай ответы, повторяй за диктором, описывай свой день. Раз в неделю — живой разговор (Cambly / Tandem / со мной).</p></div></div>
+      <div class="slot"><div class="t"><div class="n">10</div><div class="u">мин</div></div><div class="b"><h4>🧩 Слова + грамматика</h4><p>Карточки по теме недели (travel, hotel…) и одно грамматическое правило из чек-листа ниже.</p></div></div>
+    </div>
+    <p style="margin-top:14px;font-size:14.5px;color:var(--ink-faint)">Мало времени? Минимум — <b style="color:var(--teal)">15 минут аудирования</b>. Слушать каждый день важнее, чем много и редко.</p>
+  </section>
+
+  <!-- GRAMMAR CHECKLIST -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04 · точечно подтянуть</span>
+      <h2>Грамматика уровня A2 → B1</h2>
+      <p class="sec-lede">Не «вся грамматика», а именно то, что нужно для уверенного бытового общения. Отмечай галочкой, что уже уверенно знаешь — по остальному пройдёмся.</p>
+    </div>
+    <div class="check">
+      <div class="item"><span class="box"></span><span><span class="en">Present Simple vs Continuous <span class="mono">I work / I'm working</span></span><span class="ru">факты и привычки против «прямо сейчас»</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Past Simple <span class="mono">I went, did you…?</span></span><span class="ru">рассказать о прошлом + неправильные глаголы</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Future: <span class="mono">will vs going to</span></span><span class="ru">спонтанное решение против плана</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Present Perfect <span class="mono">Have you ever been…?</span></span><span class="ru">опыт: «я была в…» — важно для путешествий</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Articles <span class="mono">a / the / —</span></span><span class="ru">когда какой артикль (частая ошибка)</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Prepositions <span class="mono">at / in / on</span></span><span class="ru">место и время: at the airport, in July</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">much / many / some / any</span><span class="ru">исчисляемое и неисчисляемое</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Comparatives <span class="mono">cheaper, the best</span></span><span class="ru">сравнение: дешевле, лучший</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Modals <span class="mono">can / could / should / have to</span></span><span class="ru">просьбы, советы, необходимость</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Conditionals 0 &amp; 1 <span class="mono">if it rains…</span></span><span class="ru">реальные условия и следствия</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Question forms <span class="mono">do / did / are…?</span></span><span class="ru">правильно задавать вопросы</span></span></div>
+      <div class="item"><span class="box"></span><span><span class="en">Phrasal verbs <span class="mono">check in, get on, look for</span></span><span class="ru">бытовые глаголы для поездок</span></span></div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05 · твой набор</span>
+      <h2>Ресурсы под travel &amp; life</h2>
+      <p class="sec-lede">Упор на слух и говорение. Начни с одного из каждой категории — не хватай всё сразу.</p>
+    </div>
+    <div class="grid cols-2">
+      <div class="card res-card">
+        <span class="ic">👂</span><h3>Слушать — каждый день</h3>
+        <ul>
+          <li><span><span class="k">BBC Learning English</span> <span class="d">«6 Minute English» — короткие темы с разбором</span></span></li>
+          <li><span><span class="k">All Ears English</span> <span class="d">подкаст про реальный бытовой и travel-английский</span></span></li>
+          <li><span><span class="k">Luke's English Podcast</span> <span class="d">живая речь, много слушания</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <span class="ic">🗣</span><h3>Говорить с людьми</h3>
+        <ul>
+          <li><span><span class="k">Cambly</span> <span class="d">короткие видеозвонки с носителями</span></span></li>
+          <li><span><span class="k">Tandem / HelloTalk</span> <span class="d">переписка и звонки с носителями бесплатно</span></span></li>
+          <li><span><span class="k">ELSA Speak</span> <span class="d">тренажёр произношения, слышит твои ошибки</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <span class="ic">📱</span><h3>Приложения — привычка</h3>
+        <ul>
+          <li><span><span class="k">Duolingo</span> <span class="d">держит серию, лёгкий ежедневный вход</span></span></li>
+          <li><span><span class="k">Busuu</span> <span class="d">структурный курс с проверкой носителями</span></span></li>
+          <li><span><span class="k">Anki / Quizlet</span> <span class="d">визуальные карточки по темам</span></span></li>
+        </ul>
+      </div>
+      <div class="card res-card">
+        <span class="ic">🎬</span><h3>Смотреть и читать</h3>
+        <ul>
+          <li><span><span class="k">Friends · Emily in Paris</span> <span class="d">простая речь, смотри с англ. субтитрами</span></span></li>
+          <li><span><span class="k">Travel-влогеры</span> <span class="d">YouTube про города — язык + идеи для поездок</span></span></li>
+          <li><span><span class="k">News in Levels</span> <span class="d">новости, подобранные по уровню сложности</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:14.5px;color:var(--ink-faint)">Словари: <b style="color:var(--ink)">Cambridge Dictionary</b> (с озвучкой), <b style="color:var(--ink)">Reverso Context</b> (слово в живых примерах).</p>
+  </section>
+
+  <!-- PHRASEBOOK -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">06 · в дорогу</span>
+      <h2>Фразы для поездки</h2>
+      <p class="sec-lede">Практичный набор чуть выше базового — то, что реально спасает в аэропорту, отеле и когда что-то пошло не так.</p>
+    </div>
+    <div class="pb-wrap">
+      <table class="pb">
+        <thead><tr><th>English</th><th>По-русски</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="2">✈ В аэропорту</td></tr>
+          <tr><td class="en">Where is the check-in / gate?</td><td class="ru">Где стойка регистрации / выход на посадку?</td></tr>
+          <tr><td class="en">I have a connecting flight.</td><td class="ru">У меня стыковочный рейс.</td></tr>
+          <tr><td class="en">Is the flight delayed?</td><td class="ru">Рейс задерживается?</td></tr>
+
+          <tr class="grp"><td colspan="2">🏨 В отеле</td></tr>
+          <tr><td class="en">I have a reservation under…</td><td class="ru">У меня бронь на имя…</td></tr>
+          <tr><td class="en">Could I have a late check-out?</td><td class="ru">Можно поздний выезд?</td></tr>
+          <tr><td class="en">The Wi-Fi isn't working.</td><td class="ru">Wi-Fi не работает.</td></tr>
+
+          <tr class="grp"><td colspan="2">🧭 Ориентируемся</td></tr>
+          <tr><td class="en">How do I get to…?</td><td class="ru">Как мне добраться до…?</td></tr>
+          <tr><td class="en">Is it far from here?</td><td class="ru">Это далеко отсюда?</td></tr>
+          <tr><td class="en">One ticket to…, please.</td><td class="ru">Один билет до…, пожалуйста.</td></tr>
+
+          <tr class="grp"><td colspan="2">☕ Кафе и магазины</td></tr>
+          <tr><td class="en">Could I see the menu, please?</td><td class="ru">Можно меню, пожалуйста?</td></tr>
+          <tr><td class="en">I'll have this one.</td><td class="ru">Я буду вот это.</td></tr>
+          <tr><td class="en">Can I have the bill, please?</td><td class="ru">Счёт, пожалуйста.</td></tr>
+
+          <tr class="grp"><td colspan="2">🆘 Если что-то не так</td></tr>
+          <tr><td class="en">Sorry, could you repeat that?</td><td class="ru">Извините, повторите, пожалуйста?</td></tr>
+          <tr><td class="en">Could you speak more slowly?</td><td class="ru">Можете говорить помедленнее?</td></tr>
+          <tr><td class="en">I'm a bit lost, can you help me?</td><td class="ru">Я немного заблудилась, поможете?</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BARRIER -->
+  <section>
+    <div class="note">
+      <span class="sec-num">07 · главное для тебя</span>
+      <h2>Как убрать языковой барьер</h2>
+      <ul>
+        <li><span class="num">1</span><span><b>Понятно важнее, чем правильно.</b> В поездке цель — чтобы тебя поняли, а не идеальная грамматика. Говори с ошибками — это нормально и работает.</span></li>
+        <li><span class="num">2</span><span><b>Слушай каждый день.</b> 15 минут аудио ежедневно за месяц сделают больше, чем учебник. Ухо привыкает только от регулярности.</span></li>
+        <li><span class="num">3</span><span><b>Думай кусками, а не словами.</b> Учи готовые фразы («Could I have…», «How do I get to…») — их не надо собирать, они уже готовы к бою.</span></li>
+        <li><span class="num">4</span><span><b>Говори вслух сама с собой.</b> Описывай, что делаешь, комментируй день по-английски. Рот привыкает — в реальном разговоре меньше ступора.</span></li>
+        <li><span class="num">5</span><span><b>Свяжи с удовольствием.</b> Любимый сериал с англ. субтитрами или travel-влоги — это тоже учёба, только приятная.</span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="big">Ready for boarding ✈</div>
+  <p>Practice makes progress — не идеально, а регулярно. И у тебя получится.</p>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("fade"); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll("section").forEach(function (s) { io.observe(s); });
+  });
+</script>
+</body>
+</html>

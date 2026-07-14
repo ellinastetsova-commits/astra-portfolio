@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Petit à petit · французский с нуля — общая дизайн-система учебника
+   Тема: французская тетрадь в косую линейку (Séyès). Одна на все страницы.
+   ========================================================================== */
+
+:root {
+  --paper: #FBFAF5;
+  --paper-2: #F4F2EA;
+  --ink: #1A2340;
+  --ink-soft: #4A5372;
+  --ink-faint: #8189A3;
+  --line: #DCDACF;
+  --line-blue: #C3D2E8;
+  --line-violet: #D6CEE0;
+  --bleu: #2C4C9E;
+  --bleu-bright: #3A62C4;
+  --framboise: #C0405F;
+  --or: #A9843F;
+  --vert: #3E8F6E;
+  --card: #FFFFFF;
+  --card-2: #FDFCF8;
+  --shadow: 26 35 64;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10162B; --paper-2: #161D36; --ink: #EDEFF6; --ink-soft: #AEB6D0;
+    --ink-faint: #757EA0; --line: #2A3252; --line-blue: #2C3A63; --line-violet: #3A3358;
+    --bleu: #7C99DE; --bleu-bright: #94ABE8; --framboise: #E68199; --or: #D0AA65;
+    --vert: #64C39C; --card: #182142; --card-2: #141B37; --shadow: 0 0 0;
+  }
+}
+:root[data-theme="light"] {
+  --paper: #FBFAF5; --paper-2: #F4F2EA; --ink: #1A2340; --ink-soft: #4A5372;
+  --ink-faint: #8189A3; --line: #DCDACF; --line-blue: #C3D2E8; --line-violet: #D6CEE0;
+  --bleu: #2C4C9E; --bleu-bright: #3A62C4; --framboise: #C0405F; --or: #A9843F;
+  --vert: #3E8F6E; --card: #FFFFFF; --card-2: #FDFCF8; --shadow: 26 35 64;
+}
+:root[data-theme="dark"] {
+  --paper: #10162B; --paper-2: #161D36; --ink: #EDEFF6; --ink-soft: #AEB6D0;
+  --ink-faint: #757EA0; --line: #2A3252; --line-blue: #2C3A63; --line-violet: #3A3358;
+  --bleu: #7C99DE; --bleu-bright: #94ABE8; --framboise: #E68199; --or: #D0AA65;
+  --vert: #64C39C; --card: #182142; --card-2: #141B37; --shadow: 0 0 0;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6; font-size: 17px; overflow-x: hidden;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.serif { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif; }
+.mono  { font-family: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace; }
+.wrap  { max-width: 860px; margin: 0 auto; padding: 0 22px; }
+
+a { color: var(--bleu); text-decoration-color: color-mix(in srgb, var(--bleu) 40%, transparent); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--bleu); }
+:focus-visible { outline: 2px solid var(--bleu); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Верхняя мини-навигация (на всех страницах) ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in {
+  max-width: 860px; margin: 0 auto; padding: 11px 22px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+}
+.brand { display: flex; align-items: baseline; gap: 9px; text-decoration: none; color: var(--ink); }
+.brand .fr { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; font-weight: 600; font-size: 18px; color: var(--bleu); }
+.brand .sub { font-size: 12px; color: var(--ink-faint); letter-spacing: .04em; }
+.topbar .to-index { font-size: 13.5px; color: var(--ink-soft); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.topbar .to-index:hover { color: var(--bleu); }
+
+/* ---------- Заголовки ---------- */
+h1, h2, h3, h4 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; text-wrap: balance; }
+.eyebrow {
+  font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--framboise); font-weight: 600; margin: 0 0 14px;
+  display: flex; align-items: center; gap: 11px;
+}
+.eyebrow::before { content: ""; width: 30px; height: 1.5px; background: var(--framboise); display: inline-block; }
+
+/* ==========================================================================
+   ГЛАВНАЯ / ОГЛАВЛЕНИЕ
+   ========================================================================== */
+.cover { position: relative; padding: 70px 22px 40px; border-bottom: 1px solid var(--line); overflow: hidden; }
+.cover-lines {
+  position: absolute; inset: 0; opacity: .5; pointer-events: none;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 31px, var(--line-blue) 31px 32px);
+  mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 72%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 72%, transparent);
+}
+.cover-in { position: relative; max-width: 860px; margin: 0 auto; }
+.cover h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 600; line-height: 1.02; margin: 0; }
+.cover h1 .accent { color: var(--bleu); font-style: italic; }
+.cover .tagline { font-size: clamp(16px, 2.4vw, 20px); color: var(--ink-soft); margin: 20px 0 0; max-width: 34ch; }
+
+.progress-card {
+  margin: 30px 0 0; background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 18px 20px; box-shadow: 0 1px 3px rgb(var(--shadow) / .05);
+}
+.progress-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.progress-top .lbl { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); font-weight: 600; }
+.progress-top .cnt { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-weight: 600; font-size: 15px; }
+.progress-top .cnt b { color: var(--bleu); }
+.bar { height: 9px; border-radius: 999px; background: var(--paper-2); overflow: hidden; border: 1px solid var(--line); }
+.bar > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--bleu), var(--bleu-bright)); border-radius: 999px; transition: width .6s ease; }
+
+/* модуль-этап */
+.module { margin-top: 34px; }
+.module-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.module-tag {
+  font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--bleu);
+  padding: 4px 11px; border-radius: 999px;
+}
+.module[data-stage="0"] .module-tag { background: var(--framboise); }
+.module[data-stage="2"] .module-tag { background: var(--or); }
+.module[data-stage="3"] .module-tag { background: var(--ink); }
+.module-head h2 { font-size: 24px; margin: 0; }
+.module-head .when { font-size: 13px; color: var(--ink-faint); font-family: ui-monospace, Menlo, monospace; }
+.module-desc { color: var(--ink-soft); font-size: 15px; margin: 4px 0 16px; }
+
+.lessons { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.lesson-link {
+  display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit;
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 15px 18px; transition: border-color .18s, transform .18s, box-shadow .18s;
+}
+.lesson-link:hover { border-color: var(--bleu); transform: translateX(3px); box-shadow: 0 2px 10px rgb(var(--shadow) / .06); }
+.lesson-link .status {
+  flex: none; width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid var(--line); display: grid; place-items: center;
+  font-size: 14px; color: var(--ink-faint); background: var(--paper-2);
+}
+.lesson-link.done .status { background: var(--vert); border-color: var(--vert); color: #fff; }
+.lesson-link.done .status::before { content: "✓"; }
+.lesson-link .n { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; color: var(--ink-faint); }
+.lesson-link .t { font-weight: 600; font-family: "Iowan Old Style", Palatino, Georgia, serif; font-size: 18px; flex: 1; }
+.lesson-link .t small { display: block; font-family: system-ui, sans-serif; font-weight: 400; font-size: 13px; color: var(--ink-faint); margin-top: 1px; }
+.lesson-link .arrow { color: var(--ink-faint); font-size: 18px; }
+.lesson-link.soon { opacity: .55; pointer-events: none; }
+.lesson-link.soon .t small { color: var(--framboise); }
+
+/* ==========================================================================
+   СТРАНИЦА УРОКА
+   ========================================================================== */
+.lesson-head { padding: 46px 0 8px; }
+.crumb { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; letter-spacing: .06em; color: var(--framboise); font-weight: 600; text-transform: uppercase; }
+.lesson-head h1 { font-size: clamp(30px, 6vw, 46px); font-weight: 600; line-height: 1.08; margin: 10px 0 0; }
+.lesson-head .lede { color: var(--ink-soft); font-size: 17px; margin: 14px 0 0; max-width: 60ch; }
+
+.lesson-body { padding: 20px 0 10px; }
+.lesson-body > * + * { margin-top: 22px; }
+.lesson-body h2 { font-size: 25px; font-weight: 600; margin: 40px 0 0; }
+.lesson-body h3 { font-size: 19px; font-weight: 600; margin: 0 0 4px; }
+.lesson-body p { margin: 0; }
+.lesson-body p + p { margin-top: 12px; }
+
+/* блок-правило */
+.rule {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px 24px; position: relative; box-shadow: 0 1px 3px rgb(var(--shadow) / .05);
+}
+.rule::before { content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; background: var(--bleu); border-radius: 0 3px 3px 0; }
+.rule.rose::before { background: var(--framboise); }
+.rule.or::before { background: var(--or); }
+.rule .num {
+  font-family: "Iowan Old Style", Palatino, Georgia, serif; font-weight: 600;
+  color: var(--framboise); font-size: 14px; letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* примеры звучания */
+.ex-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.ex-list li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline; }
+.spell {
+  font-family: ui-monospace, Menlo, monospace; font-weight: 600; color: var(--bleu);
+  background: color-mix(in srgb, var(--bleu) 10%, transparent);
+  padding: 2px 9px; border-radius: 7px; font-size: 15px; white-space: nowrap;
+  min-width: 64px; text-align: center;
+}
+.spell.rose { color: var(--framboise); background: color-mix(in srgb, var(--framboise) 12%, transparent); }
+.say { color: var(--ink-soft); font-size: 15.5px; }
+.say b { color: var(--ink); }
+.fr-word { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-weight: 600; color: var(--bleu); }
+
+/* коробка-подсказка */
+.callout {
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; font-size: 15px; color: var(--ink-soft);
+  display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start;
+}
+.callout .ic { font-size: 20px; line-height: 1.2; }
+.callout b { color: var(--ink); }
+
+/* блок-упражнение */
+.exercise {
+  background: linear-gradient(180deg, var(--card), var(--card-2));
+  border: 1.5px solid var(--bleu); border-radius: 16px; padding: 26px 26px 24px;
+}
+.exercise .tag {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em; color: #fff; background: var(--bleu);
+  padding: 5px 13px; border-radius: 999px; margin-bottom: 14px;
+}
+.exercise h3 { font-size: 21px; margin: 0 0 6px; }
+.exercise ol { margin: 14px 0 0; padding-left: 4px; list-style: none; counter-reset: q; display: grid; gap: 12px; }
+.exercise ol li { counter-increment: q; display: grid; grid-template-columns: auto 1fr; gap: 13px; align-items: baseline; font-size: 17px; }
+.exercise ol li::before {
+  content: counter(q); font-family: "Iowan Old Style", Palatino, Georgia, serif; font-weight: 600;
+  color: var(--framboise); background: color-mix(in srgb, var(--framboise) 12%, transparent);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 15px;
+}
+.exercise .hint { color: var(--ink-faint); font-size: 13.5px; }
+.exercise .send { margin: 18px 0 0; font-size: 15px; color: var(--ink-soft); }
+.exercise .send b { color: var(--bleu); }
+
+/* маленькая таблица (слова/числа) */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table.mini { width: 100%; border-collapse: collapse; }
+table.mini th, table.mini td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+table.mini thead th { font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); background: var(--paper-2); }
+table.mini tbody tr:last-child td { border-bottom: none; }
+table.mini .fr { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-weight: 600; color: var(--bleu); white-space: nowrap; }
+table.mini .ipa { font-family: ui-monospace, Menlo, monospace; color: var(--ink-faint); font-size: 13.5px; white-space: nowrap; }
+
+/* кнопка «пройдено» */
+.done-row { margin-top: 40px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.btn-done {
+  font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+  background: var(--vert); color: #fff; border: none; border-radius: 999px;
+  padding: 12px 22px; display: inline-flex; align-items: center; gap: 9px; transition: filter .15s, background .15s;
+}
+.btn-done:hover { filter: brightness(1.05); }
+.btn-done.is-done { background: var(--card); color: var(--vert); border: 1.5px solid var(--vert); }
+.done-note { font-size: 13.5px; color: var(--ink-faint); }
+
+/* нижняя навигация между уроками */
+.lesson-nav {
+  margin-top: 30px; padding: 22px 0 0; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;
+}
+.lesson-nav a { text-decoration: none; }
+.nav-prev, .nav-next {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+  transition: border-color .18s;
+}
+.nav-prev:hover, .nav-next:hover { border-color: var(--bleu); }
+.nav-next { text-align: right; }
+.lesson-nav .dir { font-size: 12px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .08em; }
+.lesson-nav .ttl { font-weight: 600; font-family: "Iowan Old Style", Palatino, Georgia, serif; color: var(--ink); font-size: 15.5px; }
+.lesson-nav .home { color: var(--ink-faint); text-decoration: none; font-size: 14px; padding: 8px; }
+.lesson-nav .home:hover { color: var(--bleu); }
+.lesson-nav .placeholder { visibility: hidden; }
+
+footer.site { text-align: center; padding: 50px 22px 56px; color: var(--ink-faint); border-top: 1px solid var(--line); margin-top: 54px; }
+footer.site .fr { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; font-size: 19px; color: var(--bleu); }
+footer.site p { margin: 8px 0 0; font-size: 13px; }
+
+.fade { opacity: 0; transform: translateY(12px); animation: rise .6s ease forwards; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .fade { animation: none; opacity: 1; transform: none; } }
