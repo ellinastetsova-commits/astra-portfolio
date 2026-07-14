@@ -12,7 +12,7 @@
   }
 
   // --- Полный список уроков курса (обновляется по мере добавления) ---
-  var ALL_LESSONS = ["urok-01"];
+  var ALL_LESSONS = ["urok-01", "urok-02"];
 
   // === Страница урока: кнопка «пройдено» ===
   var btn = document.querySelector(".btn-done");
