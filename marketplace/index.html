@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Инфографика для маркетплейсов — Астра</title>
+<meta name="description" content="Портфолио дизайнера инфографики для маркетплейсов: карточки товаров для Wildberries и Ozon. 8 наборов с разбором задачи и решения.">
+<meta property="og:title" content="Инфографика для маркетплейсов — Астра">
+<meta property="og:description" content="Карточки товаров для Wildberries и Ozon: 8 наборов с разбором задачи и решения.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/termokruzhka/web/1.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9734;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f5;
+  --bg-dark:#f0ece6;
+  --ink:#1c1a19;
+  --text:#2a2a2a;
+  --text-light:#6b6b6b;
+  --accent:#a855f7;
+  --accent-2:#ec4899;
+  --accent-3:#fdba74;
+  --line:rgba(0,0,0,.08);
+  --radius:20px;
+  --radius-sm:12px;
+  --maxw:1280px;
+  --pad:40px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:#ddb4fe;color:var(--text)}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:700;line-height:1.14}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- topbar ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px var(--pad);
+  background:rgba(250,248,245,.78);backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+.topbar.scrolled{border-bottom-color:var(--line)}
+.topbar__back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--text-light);transition:color .3s}
+.topbar__back:hover{color:var(--accent)}
+.topbar__brand{font-family:'Playfair Display',serif;font-weight:700;font-size:19px}
+.topbar__cta{
+  font-size:13px;font-weight:500;padding:9px 18px;border-radius:100px;
+  background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.topbar__cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(168,85,247,.3)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:132px 0 0;overflow:hidden}
+.hero__blobs{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.62}
+.blob--1{width:540px;height:540px;background:radial-gradient(circle,#e9d5ff 0%,#c4b5fd 50%,transparent 70%);top:-16%;right:-6%}
+.blob--2{width:460px;height:460px;background:radial-gradient(circle,#fbcfe8 0%,#f9a8d4 50%,transparent 70%);top:24%;left:-12%}
+.blob--3{width:380px;height:380px;background:radial-gradient(circle,#fde3cf 0%,#fdba74 50%,transparent 70%);bottom:2%;right:22%}
+.grain::before{
+  content:'';position:absolute;inset:0;z-index:1;opacity:.4;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;mix-blend-mode:overlay;
+}
+.hero__top{position:relative;z-index:2;text-align:center;padding-bottom:56px}
+.eyebrow{
+  display:inline-block;font-size:12px;font-weight:600;color:var(--accent);
+  background:rgba(168,85,247,.1);padding:7px 16px;border-radius:100px;margin-bottom:22px;
+}
+.hero__title{font-size:clamp(40px,6.6vw,80px);margin-bottom:22px}
+.hero__title em{font-style:normal;background:linear-gradient(120deg,#a855f7,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero__lead{font-size:clamp(16px,1.9vw,19px);color:var(--text-light);max-width:62ch;margin:0 auto 30px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.chips span{
+  font-size:13px;padding:8px 17px;border-radius:100px;
+  background:rgba(255,255,255,.66);border:1px solid var(--line);color:var(--text-light);
+}
+
+/* running gallery */
+.rail{position:relative;z-index:2;padding-bottom:14px;overflow:hidden}
+.rail__row{display:flex;gap:14px;width:max-content;margin-bottom:14px}
+.rail__row--a{animation:railA 68s linear infinite}
+.rail__row--b{animation:railB 82s linear infinite}
+.rail img{height:212px;width:auto}
+@keyframes railA{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes railB{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.rail::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,var(--bg) 0%,transparent 9%,transparent 91%,var(--bg) 100%);
+}
+
+/* ---------- section base ---------- */
+section{position:relative}
+.sec{padding:104px 0}
+.sec--dark{background:var(--bg-dark)}
+.sec--ink{background:var(--ink);color:#f4f1ec}
+.sec-title{font-size:clamp(30px,4.4vw,48px);margin-bottom:16px}
+.sec-lead{font-size:16px;color:var(--text-light);max-width:62ch;margin-bottom:48px}
+.sec--ink .sec-lead{color:rgba(244,241,236,.62)}
+
+/* ---------- filters ---------- */
+.filters{
+  position:sticky;top:59px;z-index:40;
+  background:rgba(250,248,245,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.filters__inner{display:flex;gap:8px;overflow-x:auto;padding:13px var(--pad);scrollbar-width:none}
+.filters__inner::-webkit-scrollbar{display:none}
+.filter{
+  flex-shrink:0;border:1px solid var(--line);background:rgba(255,255,255,.6);
+  font:inherit;font-size:13.5px;color:var(--text-light);
+  padding:8px 17px;border-radius:100px;cursor:pointer;
+  transition:background .3s,color .3s,border-color .3s;
+}
+.filter:hover{color:var(--text);border-color:rgba(0,0,0,.16)}
+.filter.is-active{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* ---------- cases ---------- */
+.cases{padding:92px 0 30px}
+.case{padding:0 0 104px}
+.case.is-hidden{display:none}
+.case__head{margin-bottom:34px}
+.case__meta{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.case__num{
+  font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#a855f7,#ec4899);
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.case__tags{display:flex;flex-wrap:wrap;gap:7px}
+.case__tags span{font-size:12.5px;padding:6px 14px;border-radius:100px;background:rgba(168,85,247,.09);color:#8b3fd8;font-weight:500}
+.case__tags span.is-plain{background:rgba(0,0,0,.045);color:var(--text-light)}
+.case__title{font-size:clamp(28px,4vw,44px);max-width:20ch}
+
+.case__top{display:grid;grid-template-columns:380px 1fr;gap:52px;align-items:start;margin-bottom:34px}
+.blocks{display:flex;flex-direction:column;gap:26px}
+.block__label{
+  font-size:11.5px;font-weight:600;color:var(--accent);
+  display:block;margin-bottom:7px;
+}
+.block__text{font-size:14px;color:var(--text-light);line-height:1.7}
+.block__text b{color:var(--text);font-weight:600}
+.palette{display:flex;gap:8px;margin-top:4px;padding-top:22px;border-top:1px solid var(--line)}
+.sw{width:32px;height:32px;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}
+
+/* main card */
+.hero-card{
+  display:block;line-height:0;border:none;background:none;padding:0;cursor:pointer;
+  transition:transform .5s var(--ease);
+}
+.hero-card img{width:100%;height:auto;display:block}
+.hero-card:hover{transform:translateY(-6px)}
+
+/* reel of slides */
+.reel-wrap{position:relative}
+.reel{
+  display:flex;gap:16px;overflow-x:auto;
+  padding:6px calc((100vw - var(--maxw))/2 + var(--pad)) 20px;
+  margin-left:calc(50% - 50vw);width:100vw;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.16) transparent;
+}
+.reel::-webkit-scrollbar{height:6px}
+.reel::-webkit-scrollbar-thumb{background:rgba(0,0,0,.14);border-radius:10px}
+.reel::-webkit-scrollbar-track{background:transparent}
+.slide{
+  flex:0 0 auto;scroll-snap-align:start;
+  border:none;background:none;padding:0;font:inherit;color:inherit;
+  text-align:left;cursor:pointer;display:block;
+}
+.slide__img{display:block;line-height:0;transition:transform .5s var(--ease)}
+.slide__img img{height:470px;width:auto;display:block}
+.slide:hover .slide__img{transform:translateY(-6px)}
+.slide__cap{display:block;font-size:12.5px;color:var(--text-light);margin-top:12px;max-width:300px}
+.slide__cap b{display:block;color:var(--text);font-weight:600;font-size:13px;margin-bottom:2px}
+.reel-hint{
+  display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-light);
+  margin-top:2px;
+}
+
+/* ---------- approach ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{
+  background:rgba(255,255,255,.62);border:1px solid var(--line);
+  border-radius:var(--radius);padding:28px 24px;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.step:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.07)}
+.step__num{font-family:'Playfair Display',serif;font-size:15px;color:var(--accent);margin-bottom:14px}
+.step__title{font-size:19px;margin-bottom:10px}
+.step__text{font-size:14px;color:var(--text-light);line-height:1.65}
+
+/* ---------- inside (dark) ---------- */
+.inside{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.inside__item{
+  border:1px solid rgba(244,241,236,.14);border-radius:var(--radius);
+  padding:26px 24px;background:rgba(255,255,255,.03);
+  transition:border-color .4s,background .4s;
+}
+.inside__item:hover{border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.07)}
+.inside__tag{font-size:12px;font-weight:600;color:var(--accent-3);margin-bottom:12px;display:block}
+.inside__title{font-size:20px;margin-bottom:9px;color:#fff}
+.inside__text{font-size:14px;color:rgba(244,241,236,.62);line-height:1.65}
+.specs{margin-top:44px;display:flex;flex-wrap:wrap;gap:12px}
+.specs span{font-size:13px;padding:9px 18px;border-radius:100px;border:1px solid rgba(244,241,236,.18);color:rgba(244,241,236,.78)}
+
+/* ---------- cta ---------- */
+.cta{padding:112px 0 120px;text-align:center;position:relative;overflow:hidden}
+.cta .wrap{position:relative;z-index:2}
+.cta__title{font-size:clamp(30px,4.6vw,52px);margin-bottom:18px}
+.cta__text{font-size:17px;color:var(--text-light);margin-bottom:38px}
+.cta__links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:100px;font-size:15px;font-weight:500;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.btn--primary{background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff}
+.btn--ghost{background:rgba(255,255,255,.62);border:1px solid var(--line)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(168,85,247,.24)}
+
+/* ---------- footer ---------- */
+.footer{padding:34px 0;border-top:1px solid var(--line);background:var(--bg-dark)}
+.footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer__logo{font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
+.footer__copy{font-size:14px;color:var(--text-light)}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:200;display:none;background:rgba(20,18,17,.95);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:56px 20px 84px}
+.lb.open{display:flex}
+.lb__img{max-width:min(94vw,720px);max-height:100%;object-fit:contain}
+.lb__close,.lb__nav{position:absolute;background:rgba(255,255,255,.12);border:none;color:#fff;width:46px;height:46px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s}
+.lb__close:hover,.lb__nav:hover{background:rgba(255,255,255,.26)}
+.lb__close{top:18px;right:18px}
+.lb__nav--prev{left:18px;top:50%;transform:translateY(-50%)}
+.lb__nav--next{right:18px;top:50%;transform:translateY(-50%)}
+.lb__meta{position:absolute;bottom:24px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-size:14px;padding:0 20px}
+.lb__meta b{color:#fff;font-weight:600}
+
+/* ---------- responsive ---------- */
+@media (max-width:1340px){
+  .reel{padding-left:var(--pad);padding-right:var(--pad)}
+}
+@media (max-width:1080px){
+  .case__top{grid-template-columns:300px 1fr;gap:34px}
+  .steps,.inside{grid-template-columns:repeat(2,1fr)}
+  .slide__img img{height:400px}
+}
+@media (max-width:860px){
+  .case__top{grid-template-columns:1fr;gap:28px}
+  .hero-card{max-width:340px}
+}
+@media (max-width:760px){
+  :root{--pad:20px}
+  .hero{padding:112px 0 0}
+  .rail img{height:150px}
+  .sec{padding:72px 0}
+  .cases{padding:64px 0 10px}
+  .case{padding-bottom:76px}
+  .filters{top:55px}
+  .steps,.inside{grid-template-columns:1fr}
+  .slide__img img{height:330px}
+  .slide__cap{max-width:240px}
+  .lb{padding:56px 12px 76px}
+  .lb__nav{width:40px;height:40px}
+  .lb__nav--prev{left:8px}
+  .lb__nav--next{right:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .rail__row{animation:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= TOPBAR ================= -->
+<header class="topbar" id="topbar">
+  <a href="../" class="topbar__back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>на главную</span>
+  </a>
+  <a href="../" class="topbar__brand">астра</a>
+  <a href="https://t.me/astrapsc" target="_blank" rel="noopener" class="topbar__cta">написать</a>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero grain">
+  <div class="hero__blobs">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="blob blob--3"></div>
+  </div>
+
+  <div class="wrap hero__top">
+    <span class="eyebrow reveal">портфолио · маркетплейсы</span>
+    <h1 class="hero__title reveal">инфографика<br>для <em>карточек товаров</em></h1>
+    <p class="hero__lead reveal">
+      Собираю наборы карточек для Wildberries и Ozon: главное фото, преимущества, состав,
+      сценарии использования. В едином стиле, с читаемым с телефона текстом и по требованиям площадки.
+    </p>
+    <div class="chips reveal">
+      <span>Wildberries · Ozon</span>
+      <span>вертикаль 3:4</span>
+      <span>исходники в Figma</span>
+      <span>8 наборов в портфолио</span>
+    </div>
+  </div>
+
+  <div class="rail" id="rail" aria-hidden="true"></div>
+</section>
+
+<!-- ================= FILTERS ================= -->
+<div class="filters" id="filters">
+  <div class="filters__inner">
+    <button class="filter is-active" data-cat="all">все работы</button>
+    <button class="filter" data-cat="dom">дом и посуда</button>
+    <button class="filter" data-cat="tech">техника</button>
+    <button class="filter" data-cat="beauty">уход и косметика</button>
+    <button class="filter" data-cat="parfum">парфюмерия</button>
+    <button class="filter" data-cat="zoo">зоотовары</button>
+    <button class="filter" data-cat="gigiena">гигиена</button>
+  </div>
+</div>
+
+<!-- ================= CASES ================= -->
+<section class="cases" id="cases">
+  <div class="wrap">
+
+    <!-- ===== 01 термокружка ===== -->
+    <article class="case" id="termokruzhka" data-gallery="Термокружка с датчиком температуры" data-cat="dom">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">01</div>
+          <div class="case__tags">
+            <span>посуда и дом</span>
+            <span class="is-plain">5 карточек</span>
+            <span class="is-plain">1024×1536</span>
+          </div>
+        </div>
+        <h2 class="case__title">Термокружка с датчиком температуры</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/termokruzhka/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/termokruzhka/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Кружка с сенсорным датчиком температуры на крышке. В выдаче десятки похожих термокружек, и все показывают одно и то же — товар на белом фоне со списком характеристик. Нужно было выделиться и объяснить, за что здесь платят больше.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Ушла от белого фона к <b>тёплой кофейной сцене</b>: тёмное дерево, свечи, латте, мягкий свет. Датчику отдала отдельный слайд с макро-зумом крышки. Финальный слайд — сценарии: дорога, прогулка, пикник, работа.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">Такую кружку покупают не по характеристикам, а по настроению — это «уютная вещь для себя». Тёплая палитра продаёт ощущение, а зум на дисплей закрывает главный вопрос: «датчик правда работает и его правда видно?»</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#2B2118"></span>
+            <span class="sw" style="background:#614937"></span>
+            <span class="sw" style="background:#C7AE97"></span>
+            <span class="sw" style="background:#F0E6DA"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/termokruzhka/full/2.jpg" data-cap="сталь, теплосохранение, герметичная крышка">
+            <span class="slide__img"><img src="img/termokruzhka/web/2.jpg" alt="Термокружка — детали" loading="lazy"></span>
+            <span class="slide__cap"><b>Детали</b>сталь, теплосохранение, герметичность</span>
+          </button>
+          <button class="slide" data-full="img/termokruzhka/full/3.jpg" data-cap="кружка в руках, в контексте обычного дня">
+            <span class="slide__img"><img src="img/termokruzhka/web/3.jpg" alt="Термокружка — лайфстайл" loading="lazy"></span>
+            <span class="slide__cap"><b>Лайфстайл</b>кружка в руках, в контексте дня</span>
+          </button>
+          <button class="slide" data-full="img/termokruzhka/full/4.jpg" data-cap="макро-зум на дисплей — главный аргумент товара">
+            <span class="slide__img"><img src="img/termokruzhka/web/4.jpg" alt="Термокружка — датчик температуры" loading="lazy"></span>
+            <span class="slide__cap"><b>Датчик крупно</b>макро-зум на дисплей</span>
+          </button>
+          <button class="slide" data-full="img/termokruzhka/full/5.jpg" data-cap="дорога, прогулка, пикник, работа">
+            <span class="slide__img"><img src="img/termokruzhka/web/5.jpg" alt="Термокружка — сценарии" loading="lazy"></span>
+            <span class="slide__cap"><b>Сценарии</b>дорога, прогулка, пикник, работа</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 02 духи ===== -->
+    <article class="case" id="dukhi" data-gallery="Женские духи Flora, 10 мл" data-cat="parfum">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">02</div>
+          <div class="case__tags">
+            <span>парфюмерия</span>
+            <span class="is-plain">4 карточки</span>
+            <span class="is-plain">1254×1254</span>
+          </div>
+        </div>
+        <h2 class="case__title">Женские духи Flora, 10 мл</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/dukhi/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/dukhi/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Компактный формат 10 мл в сумочку. Главная сложность категории: аромат нельзя понюхать через экран, а сам флакон маленький и визуально «дешевит» карточку.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Построила карточки как <b>парфюмерную рекламу</b>: розовый шёлк, лилии, мрамор, крупный серифный логотип. Аромат перевела в графику — слайд с пирамидой нот и фото каждой: груша, гардения, пачули. Финал — фирменная коробка.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">Пирамида даёт понять запах без «понюхать» — это то, что ищут в вопросах к товару. А слайд с коробкой закрывает второй сценарий покупки: такие духи часто берут в подарок, и важно показать, что дарить их не стыдно.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#F8DDE3"></span>
+            <span class="sw" style="background:#E9A6B8"></span>
+            <span class="sw" style="background:#F5E1DA"></span>
+            <span class="sw" style="background:#1A1A1A"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/dukhi/full/2.jpg" data-cap="верх, сердце, база — с фото каждой ноты">
+            <span class="slide__img"><img src="img/dukhi/web/2.jpg" alt="Духи Flora — пирамида аромата" loading="lazy"></span>
+            <span class="slide__cap"><b>Пирамида аромата</b>верх, сердце, база — с фото нот</span>
+          </button>
+          <button class="slide" data-full="img/dukhi/full/3.jpg" data-cap="для свиданий и вечера, стойкость 8–10 часов">
+            <span class="slide__img"><img src="img/dukhi/web/3.jpg" alt="Духи Flora — повод и стойкость" loading="lazy"></span>
+            <span class="slide__cap"><b>Повод и стойкость</b>вечер, свидание, 8–10 часов</span>
+          </button>
+          <button class="slide" data-full="img/dukhi/full/4.jpg" data-cap="фирменная коробка и объём">
+            <span class="slide__img"><img src="img/dukhi/web/4.jpg" alt="Духи Flora — подарочная упаковка" loading="lazy"></span>
+            <span class="slide__cap"><b>Готовый подарок</b>фирменная коробка и объём</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 03 пылесос ===== -->
+    <article class="case" id="pylesos" data-gallery="Беспроводной пылесос 2 в 1" data-cat="tech">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">03</div>
+          <div class="case__tags">
+            <span>техника для дома</span>
+            <span class="is-plain">5 карточек</span>
+            <span class="is-plain">1086×1448</span>
+          </div>
+        </div>
+        <h2 class="case__title">Беспроводной пылесос 2 в 1</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/pylesos/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/pylesos/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Вертикальный пылесос 2 в 1 в среднем ценовом сегменте. Здесь покупатель сравнивает по цифрам и боится ошибиться: хватит ли мощности, надолго ли заряда, не окажется ли он громоздким.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Сделала карточки в логике <b>технического каталога</b>: холодный бело-синий фон, жирный гротеск, цифры крупно — 120 Вт, 45 минут, 36 000 оборотов. Отдельные слайды: мытьё HEPA-фильтра по шагам, 5 насадок с поверхностями, габариты в сантиметрах, уборка авто.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">В технике карточка должна работать как ответ на отзывы. Размеры снимают «а не будет ли он огромным», мытьё фильтра — «а что потом делать с пылью», слайд про авто добавляет второй повод купить. Здесь продаёт не эмоция, а ясность.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#F1F3F7"></span>
+            <span class="sw" style="background:#2F6FE0"></span>
+            <span class="sw" style="background:#ABB4C4"></span>
+            <span class="sw" style="background:#1B2436"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/pylesos/full/2.jpg" data-cap="4 шага и устройство пылесборника">
+            <span class="slide__img"><img src="img/pylesos/web/2.jpg" alt="Пылесос — уход за фильтром" loading="lazy"></span>
+            <span class="slide__cap"><b>Уход за фильтром</b>4 шага, устройство пылесборника</span>
+          </button>
+          <button class="slide" data-full="img/pylesos/full/3.jpg" data-cap="5 насадок и поверхности под каждую">
+            <span class="slide__img"><img src="img/pylesos/web/3.jpg" alt="Пылесос — насадки" loading="lazy"></span>
+            <span class="slide__cap"><b>Насадки</b>5 штук и поверхности под каждую</span>
+          </button>
+          <button class="slide" data-full="img/pylesos/full/4.jpg" data-cap="габариты в см и полные характеристики">
+            <span class="slide__img"><img src="img/pylesos/web/4.jpg" alt="Пылесос — размеры" loading="lazy"></span>
+            <span class="slide__cap"><b>Размеры</b>габариты в см и характеристики</span>
+          </button>
+          <button class="slide" data-full="img/pylesos/full/5.jpg" data-cap="второй сценарий использования — уборка авто">
+            <span class="slide__img"><img src="img/pylesos/web/5.jpg" alt="Пылесос — уборка авто" loading="lazy"></span>
+            <span class="slide__cap"><b>Уборка авто</b>второй сценарий использования</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 04 сыворотка ===== -->
+    <article class="case" id="syvorotka" data-gallery="Сыворотка с муцином улитки Dimollaure" data-cat="beauty">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">04</div>
+          <div class="case__tags">
+            <span>уход и косметика</span>
+            <span class="is-plain">4 карточки</span>
+            <span class="is-plain">1086×1448</span>
+          </div>
+        </div>
+        <h2 class="case__title">Сыворотка с муцином улитки Dimollaure</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/syvorotka/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/syvorotka/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Антивозрастная сыворотка малоизвестного бренда. У покупательницы два барьера: «бренд не на слуху» и «непонятно, что внутри и как это работает».</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Взяла <b>фиолетово-золотую палитру с упаковки</b> и вытянула её на весь набор — карточки выглядят дороже самого бренда. Состав разобрала на слайде: муцин, гиалуроновая кислота, экстракты, ниацинамид — каждый с макро-визуалом и строкой пользы.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">В уходе доверие строится на понятном составе: если видно знакомые компоненты и понятно, за что каждый отвечает, незнакомый бренд перестаёт пугать. А слайд «способ применения» превращает баночку в понятный ежедневный ритуал.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#F5ECEA"></span>
+            <span class="sw" style="background:#795C7D"></span>
+            <span class="sw" style="background:#4A2E5C"></span>
+            <span class="sw" style="background:#D4B26A"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/syvorotka/full/2.jpg" data-cap="4 активных компонента и польза каждого">
+            <span class="slide__img"><img src="img/syvorotka/web/2.jpg" alt="Сыворотка — состав" loading="lazy"></span>
+            <span class="slide__cap"><b>Состав</b>4 компонента и польза каждого</span>
+          </button>
+          <button class="slide" data-full="img/syvorotka/full/3.jpg" data-cap="что меняется при регулярном применении">
+            <span class="slide__img"><img src="img/syvorotka/web/3.jpg" alt="Сыворотка — эффект" loading="lazy"></span>
+            <span class="slide__cap"><b>Эффект</b>что меняется при регулярном уходе</span>
+          </button>
+          <button class="slide" data-full="img/syvorotka/full/4.jpg" data-cap="2–3 капли утром и вечером">
+            <span class="slide__img"><img src="img/syvorotka/web/4.jpg" alt="Сыворотка — применение" loading="lazy"></span>
+            <span class="slide__cap"><b>Применение</b>2–3 капли утром и вечером</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 05 щётка ===== -->
+    <article class="case" id="shchetka" data-gallery="Электрическая зубная щётка PECHAM" data-cat="tech">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">05</div>
+          <div class="case__tags">
+            <span>техника для дома</span>
+            <span class="is-plain">4 карточки</span>
+            <span class="is-plain">1122×1402</span>
+          </div>
+        </div>
+        <h2 class="case__title">Электрическая зубная щётка PECHAM</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/shchetka/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/shchetka/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Щётка с четырьмя режимами в очень плотной категории: десятки моделей, внешне почти одинаковых, с похожим описанием. Покупатель выбирает буквально между карточками.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Собрала <b>чистый бело-голубой набор</b> с водой, мятой и медными акцентами под цвет корпуса. Вынесла цифры, по которым реально сравнивают: 8800 движений в минуту, до 60 дней работы, IPX6, зарядка за 4 часа. Отдельный слайд — четыре режима.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">Когда товары одинаковые, выигрывает та карточка, где легче сравнивать. Поэтому цифры крупные и в едином формате, а режимы расписаны словами покупателя: «отбеливание», «чистка», «полировка», «массаж» — а не терминами.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#EDEEF4"></span>
+            <span class="sw" style="background:#5FA8D3"></span>
+            <span class="sw" style="background:#C89B6E"></span>
+            <span class="sw" style="background:#2B2B2B"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/shchetka/full/2.jpg" data-cap="8800 движений, 360°, таймер на 2 минуты">
+            <span class="slide__img"><img src="img/shchetka/web/2.jpg" alt="Зубная щётка — очищение" loading="lazy"></span>
+            <span class="slide__cap"><b>Очищение</b>8800 движений, 360°, таймер</span>
+          </button>
+          <button class="slide" data-full="img/shchetka/full/3.jpg" data-cap="отбеливание, чистка, полировка, массаж">
+            <span class="slide__img"><img src="img/shchetka/web/3.jpg" alt="Зубная щётка — режимы" loading="lazy"></span>
+            <span class="slide__cap"><b>4 режима</b>и зачем нужен каждый</span>
+          </button>
+          <button class="slide" data-full="img/shchetka/full/4.jpg" data-cap="зарядка, ёмкость, IPX6 и гарантия">
+            <span class="slide__img"><img src="img/shchetka/web/4.jpg" alt="Зубная щётка — автономность" loading="lazy"></span>
+            <span class="slide__cap"><b>Автономность</b>зарядка, ёмкость, IPX6, гарантия</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 06 скраб ===== -->
+    <article class="case" id="skrab" data-gallery="Арбузный скраб для тела OnlyBio" data-cat="beauty">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">06</div>
+          <div class="case__tags">
+            <span>уход и косметика</span>
+            <span class="is-plain">3 карточки</span>
+            <span class="is-plain">1055×1491</span>
+          </div>
+        </div>
+        <h2 class="case__title">Арбузный скраб для тела OnlyBio</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/skrab/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/skrab/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Масс-маркет скраб с арбузным ароматом. Бьюти-полка на маркетплейсе очень пёстрая: все карточки яркие, и на превью товар легко теряется среди конкурентов.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Оттолкнулась от самого продукта — он двухцветный, зелёно-розовый, как арбуз. Вынесла эту пару <b>в название крупным контрастным шрифтом</b> и в макро-текстуру скраба. Дальше — результат на модели и состав с эко-маркировкой.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">На пёстрой полке выигрывает не «ещё ярче», а понятнее: чистый светлый фон и один сильный цветовой акцент читаются быстрее. А макро-текстура работает как дегустация — сразу считывается, что скраб сочный и свежий.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#E8175D"></span>
+            <span class="sw" style="background:#6FBF3B"></span>
+            <span class="sw" style="background:#FCF8F6"></span>
+            <span class="sw" style="background:#2E7D32"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/skrab/full/2.jpg" data-cap="что даёт уже одно применение">
+            <span class="slide__img"><img src="img/skrab/web/2.jpg" alt="Скраб — результат" loading="lazy"></span>
+            <span class="slide__cap"><b>Результат</b>что даёт одно применение</span>
+          </button>
+          <button class="slide" data-full="img/skrab/full/3.jpg" data-cap="эко-маркировки, объём и 3 шага применения">
+            <span class="slide__img"><img src="img/skrab/web/3.jpg" alt="Скраб — состав и применение" loading="lazy"></span>
+            <span class="slide__cap"><b>Состав и применение</b>маркировки, объём, 3 шага</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 07 корм ===== -->
+    <article class="case" id="korm" data-gallery="Сухой корм PET PRIDE для стерилизованных кошек" data-cat="zoo">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">07</div>
+          <div class="case__tags">
+            <span>зоотовары</span>
+            <span class="is-plain">3 карточки</span>
+            <span class="is-plain">1086×1448</span>
+          </div>
+        </div>
+        <h2 class="case__title">Сухой корм PET PRIDE для стерилизованных кошек</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/korm/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/korm/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Премиальный корм для конкретной группы — стерилизованных кошек. Нужно было донести две вещи сразу: что корм специализированный (не «просто с рыбой») и что он действительно премиум-класса.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Первый слайд — <b>на глубоком чёрном фоне</b> под цвет упаковки, с лососем и гранулами: премиальность считывается мгновенно. Второй — тёплая домашняя сцена с довольной кошкой. Третий — состав: лосось, рис, свекольный жом и БЖУ цифрами.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">Корм выбирает хозяин, и решение у него эмоциональное: сначала «моей кошке будет хорошо», а потом «состав подходящий». Поэтому эмоция идёт вторым слайдом — сразу после того, как чёрный фон отработал на впечатление.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#121214"></span>
+            <span class="sw" style="background:#E8735A"></span>
+            <span class="sw" style="background:#B57F6F"></span>
+            <span class="sw" style="background:#F0EAE4"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/korm/full/2.jpg" data-cap="контроль веса и здоровье — на живой сцене">
+            <span class="slide__img"><img src="img/korm/web/2.jpg" alt="Корм — польза" loading="lazy"></span>
+            <span class="slide__cap"><b>Польза</b>контроль веса и здоровье, живая сцена</span>
+          </button>
+          <button class="slide" data-full="img/korm/full/3.jpg" data-cap="лосось, рис, клетчатка и БЖУ цифрами">
+            <span class="slide__img"><img src="img/korm/web/3.jpg" alt="Корм — ингредиенты" loading="lazy"></span>
+            <span class="slide__cap"><b>Ингредиенты</b>лосось, рис, клетчатка, БЖУ</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 08 паста ===== -->
+    <article class="case" id="pasta" data-gallery="Зубная паста SYNERGETIC" data-cat="gigiena">
+      <div class="case__head reveal">
+        <div class="case__meta">
+          <div class="case__num">08</div>
+          <div class="case__tags">
+            <span>гигиена</span>
+            <span class="is-plain">3 карточки</span>
+            <span class="is-plain">1122×1402</span>
+          </div>
+        </div>
+        <h2 class="case__title">Зубная паста SYNERGETIC</h2>
+      </div>
+
+      <div class="case__top">
+        <button class="hero-card reveal" data-full="img/pasta/full/1.jpg" data-cap="главное фото набора" aria-label="Открыть главную карточку крупно">
+          <img src="img/pasta/web/1.jpg" alt="Главная карточка набора" loading="lazy">
+        </button>
+
+        <div class="blocks reveal">
+          <div class="block">
+            <span class="block__label">Задача</span>
+            <p class="block__text">Паста известного эко-бренда с узнаваемой фиолетовой айдентикой. Здесь нельзя было «придумывать дизайн» — карточки должны были остаться в рамках бренда и при этом продавать.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Решение</span>
+            <p class="block__text">Взяла <b>только фирменную сиреневую палитру</b> и повторила её в фоне, пузырьках и подложках. Аргументы свела к трём, которые важны в категории: 97,4% natural, без фтора, для чувствительных зубов. Макро-текстура заняла целый слайд.</p>
+          </div>
+          <div class="block">
+            <span class="block__label">Почему так</span>
+            <p class="block__text">У бренда уже есть визуальный код — если карточка его ломает, товар выглядит как подделка. Моя задача была не переизобрести стиль, а аккуратно продлить его: минимум текста, много воздуха и один фирменный цвет на весь набор.</p>
+          </div>
+          <div class="palette">
+            <span class="sw" style="background:#FBFAFC"></span>
+            <span class="sw" style="background:#DCC1E1"></span>
+            <span class="sw" style="background:#8C619D"></span>
+            <span class="sw" style="background:#63307A"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reel-wrap reveal">
+        <div class="reel">
+          <button class="slide" data-full="img/pasta/full/2.jpg" data-cap="макро-текстура, 97,4% natural, без фтора">
+            <span class="slide__img"><img src="img/pasta/web/2.jpg" alt="Зубная паста — состав" loading="lazy"></span>
+            <span class="slide__cap"><b>Мягкий уход</b>макро-текстура и состав</span>
+          </button>
+          <button class="slide" data-full="img/pasta/full/3.jpg" data-cap="объём 100 г и краткое резюме">
+            <span class="slide__img"><img src="img/pasta/web/3.jpg" alt="Зубная паста — формат" loading="lazy"></span>
+            <span class="slide__cap"><b>Формат</b>объём 100 г и резюме набора</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= APPROACH ================= -->
+<section class="sec sec--dark">
+  <div class="wrap">
+    <h2 class="sec-title reveal">как я собираю набор</h2>
+    <p class="sec-lead reveal">Карточка на маркетплейсе — это не «красивая картинка», а продающий экран. Поэтому начинаю не с дизайна, а с товара и возражений покупателя.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step__num">01</div>
+        <h3 class="step__title">Разбираю товар</h3>
+        <p class="step__text">Читаю характеристики, отзывы и вопросы к похожим товарам. Выписываю, что реально решает покупку и какие сомнения мешают нажать «в корзину».</p>
+      </div>
+      <div class="step reveal">
+        <div class="step__num">02</div>
+        <h3 class="step__title">Строю сценарий</h3>
+        <p class="step__text">Раскладываю аргументы по слайдам: один слайд — одна мысль. Порядок такой, чтобы человек листал и с каждым слайдом всё меньше сомневался.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step__num">03</div>
+        <h3 class="step__title">Подбираю визуальный язык</h3>
+        <p class="step__text">Палитра, шрифты, тип фона и иконки — от категории и аудитории. Техника и бьюти листаются по-разному, и выглядеть они должны тоже по-разному.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step__num">04</div>
+        <h3 class="step__title">Собираю в Figma</h3>
+        <p class="step__text">Единая сетка и стили на весь набор, кегль под чтение с телефона, финал — вертикаль 3:4 в RGB, с запасом под требования площадки.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta grain">
+  <div class="hero__blobs">
+    <div class="blob blob--2" style="top:-20%;left:-6%"></div>
+    <div class="blob blob--1" style="bottom:-30%;right:-6%;top:auto"></div>
+  </div>
+  <div class="wrap">
+    <h2 class="cta__title reveal">нужны карточки<br>для вашего товара?</h2>
+    <p class="cta__text reveal">Пришлите фото и характеристики — соберу набор в едином стиле, под требования площадки.</p>
+    <div class="cta__links reveal">
+      <a href="https://t.me/astrapsc" target="_blank" rel="noopener" class="btn btn--primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.44 3.81-1.58 4.6-1.86 5.12-1.87.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .38z"/></svg>
+        <span>написать в Telegram</span>
+      </a>
+      <a href="mailto:ellinastetsova@gmail.com" class="btn btn--ghost">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span>написать на почту</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT'S INSIDE ================= -->
+<section class="sec sec--ink">
+  <div class="wrap">
+    <h2 class="sec-title reveal" style="color:#fff">что входит в набор</h2>
+    <p class="sec-lead reveal">Базовая структура, которую я адаптирую под конкретный товар — где-то нужен слайд с размерами, где-то с составом или способом применения.</p>
+    <div class="inside">
+      <div class="inside__item reveal">
+        <span class="inside__tag">слайд 1</span>
+        <h3 class="inside__title">Главное фото</h3>
+        <p class="inside__text">Товар крупно, минимум текста, один бейдж. Именно этот кадр решает, кликнет человек по карточке в выдаче или пролистает дальше.</p>
+      </div>
+      <div class="inside__item reveal">
+        <span class="inside__tag">слайд 2</span>
+        <h3 class="inside__title">Преимущества</h3>
+        <p class="inside__text">3–5 главных плюсов иконками и короткими тезисами. Без «воды» — только то, что человек не увидит на фото сам.</p>
+      </div>
+      <div class="inside__item reveal">
+        <span class="inside__tag">слайд 3</span>
+        <h3 class="inside__title">Состав и характеристики</h3>
+        <p class="inside__text">Материалы, компоненты, мощность, объём. Всё, что закрывает вопрос «а из чего это и потянет ли мою задачу».</p>
+      </div>
+      <div class="inside__item reveal">
+        <span class="inside__tag">слайд 4</span>
+        <h3 class="inside__title">Сценарии использования</h3>
+        <p class="inside__text">Товар в жизни: дома, в дороге, в машине. Помогает примерить покупку на себя и увидеть, что она нужна не «когда-нибудь».</p>
+      </div>
+      <div class="inside__item reveal">
+        <span class="inside__tag">слайд 5</span>
+        <h3 class="inside__title">Размеры и комплектация</h3>
+        <p class="inside__text">Габариты, что в коробке, как обслуживать. Снимает самые частые вопросы в отзывах — а значит, и часть возвратов.</p>
+      </div>
+      <div class="inside__item reveal">
+        <span class="inside__tag">на весь набор</span>
+        <h3 class="inside__title">Единый стиль</h3>
+        <p class="inside__text">Одна палитра, одни шрифты, одна сетка и отступы. Набор читается как система, а карточка — как товар бренда, а не самоделка.</p>
+      </div>
+    </div>
+    <div class="specs reveal">
+      <span>вертикаль 3:4</span>
+      <span>RGB · JPG / PNG</span>
+      <span>текст читается с телефона</span>
+      <span>без цен и контактов на главном фото</span>
+      <span>исходники в Figma</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <a href="../" class="footer__logo">астра</a>
+      <p class="footer__copy">веб-дизайн и инфографика для маркетплейсов</p>
+    </div>
+    <a href="../" class="footer__copy">← все проекты на astrapsc.ru</a>
+  </div>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр карточки">
+  <button class="lb__close" id="lbClose" aria-label="Закрыть">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <button class="lb__nav lb__nav--prev" id="lbPrev" aria-label="Предыдущая">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <img class="lb__img" id="lbImg" alt="">
+  <button class="lb__nav lb__nav--next" id="lbNext" aria-label="Следующая">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="lb__meta" id="lbMeta"></div>
+</div>
+
+<script>
+(function(){
+  /* ---------- hero running rail ---------- */
+  var SETS = {
+    termokruzhka:5, dukhi:4, pylesos:5, syvorotka:4,
+    shchetka:4, skrab:3, korm:3, pasta:3
+  };
+  var all = [];
+  for(var k in SETS){ for(var i=1;i<=SETS[k];i++){ all.push('img/'+k+'/web/'+i+'.jpg'); } }
+  // перемешиваем детерминированно, чтобы товары не шли подряд
+  var mixed = [];
+  for(var step=0; step<3; step++){
+    for(var j=step;j<all.length;j+=3){ mixed.push(all[j]); }
+  }
+  var half = Math.ceil(mixed.length/2);
+  var rows = [mixed.slice(0,half), mixed.slice(half)];
+  var rail = document.getElementById('rail');
+  rows.forEach(function(list, n){
+    var row = document.createElement('div');
+    row.className = 'rail__row rail__row--' + (n===0 ? 'a' : 'b');
+    var html = list.map(function(src){ return '<img src="'+src+'" alt="" loading="lazy">'; }).join('');
+    row.innerHTML = html + html;   // дубль для бесшовной прокрутки
+    rail.appendChild(row);
+  });
+
+  /* ---------- reveal ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- topbar ---------- */
+  var topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', function(){
+    topbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, {passive:true});
+
+  /* ---------- filters ---------- */
+  var cases = Array.prototype.slice.call(document.querySelectorAll('.case'));
+  document.querySelectorAll('.filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter').forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var cat = btn.dataset.cat;
+      cases.forEach(function(c){
+        c.classList.toggle('is-hidden', cat !== 'all' && c.dataset.cat !== cat);
+      });
+    });
+  });
+
+  /* ---------- lightbox ---------- */
+  var lb    = document.getElementById('lb'),
+      lbImg = document.getElementById('lbImg'),
+      lbMeta= document.getElementById('lbMeta'),
+      group = [], idx = 0, groupName = '';
+
+  function show(i){
+    idx = (i + group.length) % group.length;
+    var s = group[idx];
+    lbImg.src = s.dataset.full;
+    lbImg.alt = groupName + ' — карточка ' + (idx+1);
+    lbMeta.innerHTML = '<b>' + groupName + '</b> · ' + (idx+1) + ' из ' + group.length + ' · ' + s.dataset.cap;
+  }
+  function open(art, i){
+    group = Array.prototype.slice.call(art.querySelectorAll('.hero-card, .slide'));
+    groupName = art.dataset.gallery || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    show(i);
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  document.querySelectorAll('.case').forEach(function(art){
+    art.querySelectorAll('.hero-card, .slide').forEach(function(btn, i){
+      btn.addEventListener('click', function(){ open(art, i); });
+    });
+  });
+
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(idx-1); });
+  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show(idx+1); });
+  lb.addEventListener('click', function(e){ if(e.target === lb || e.target === lbImg) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') show(idx-1);
+    if(e.key === 'ArrowRight') show(idx+1);
+  });
+})();
+</script>
+</body>
+</html>
