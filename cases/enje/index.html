@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кейс · ENJE — интернет-магазин украшений из жемчуга</title>
+<meta name="description" content="Концепт интернет-магазина украшений из натурального жемчуга: UX/UI, каталог, карточка товара, оформление заказа, личный кабинет, мобильная версия.">
+<meta property="og:title" content="ENJE · концепт интернет-магазина украшений">
+<meta property="og:description" content="От брифа до полного сценария покупки: каталог, фильтры, карточка товара, чекаут, личный кабинет.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/01.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9734;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F6F2EC;
+  --cream-2:#EDE7DE;
+  --ink:#161412;
+  --ink-soft:#5B554E;
+  --line:rgba(22,20,18,.12);
+  --maxw:1240px;
+  --pad:40px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--cream);color:var(--ink);
+  line-height:1.6;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--ink);color:var(--cream)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* topbar */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px var(--pad);
+  background:rgba(246,242,236,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+.topbar.scrolled{border-bottom-color:var(--line)}
+.topbar__back{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft);transition:color .3s}
+.topbar__back:hover{color:var(--ink)}
+.topbar__brand{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.34em;padding-left:.34em}
+.topbar__cta{font-size:13px;padding:9px 18px;border-radius:100px;background:var(--ink);color:var(--cream);transition:opacity .3s}
+.topbar__cta:hover{opacity:.85}
+
+/* hero */
+.hero{padding:150px 0 64px}
+.hero__eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:26px}
+.hero__title{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(64px,13vw,168px);line-height:.95;
+  letter-spacing:.06em;margin-bottom:30px;
+}
+.hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
+.hero__lead{font-size:clamp(16px,1.7vw,19px);color:var(--ink-soft);max-width:52ch}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:26px 20px;padding-top:6px}
+.meta__k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+.meta__v{font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:38px}
+.tags span{font-size:12.5px;padding:8px 18px;border:1px solid var(--line);border-radius:100px;color:var(--ink-soft)}
+.tags span.is-solid{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+
+/* задача/решение */
+.about{padding:78px 0;border-top:1px solid var(--line);background:var(--cream-2)}
+.about__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.about__k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+.about__t{font-size:15px;color:var(--ink-soft);line-height:1.75}
+.about__t b{color:var(--ink);font-weight:600}
+
+/* секции-картинки */
+.shots{padding:78px 0 20px}
+.shot{margin-bottom:70px}
+.shot__cap{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+.shot__num{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink-soft)}
+.shot__name{font-size:15px}
+.shot__img{
+  display:block;width:100%;border:none;background:none;padding:0;cursor:zoom-in;
+  transition:transform .5s var(--ease);
+}
+.shot__img img{width:100%;height:auto;display:block}
+.shot__img:hover{transform:translateY(-4px)}
+
+/* cta */
+.cta{padding:96px 0 104px;text-align:center;border-top:1px solid var(--line)}
+.cta__title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,5vw,58px);line-height:1.1;margin-bottom:20px}
+.cta__text{font-size:16px;color:var(--ink-soft);margin-bottom:36px}
+.cta__links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:100px;font-size:15px;transition:transform .4s var(--ease),opacity .3s}
+.btn--dark{background:var(--ink);color:var(--cream)}
+.btn--ghost{border:1px solid var(--line)}
+.btn:hover{transform:translateY(-2px)}
+
+/* footer */
+.footer{padding:30px 0;border-top:1px solid var(--line);background:var(--cream-2)}
+.footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer__note{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* лайтбокс */
+.lb{position:fixed;inset:0;z-index:200;display:none;background:rgba(18,16,14,.96);align-items:flex-start;justify-content:center;overflow:auto;padding:60px 16px}
+.lb.open{display:flex}
+.lb img{max-width:1400px;width:100%;height:auto}
+.lb__close{position:fixed;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb__close:hover{background:rgba(255,255,255,.28)}
+
+@media (max-width:900px){
+  .hero__grid{grid-template-columns:1fr;gap:34px}
+  .about__grid{grid-template-columns:1fr;gap:28px}
+}
+@media (max-width:640px){
+  :root{--pad:20px}
+  .hero{padding:120px 0 48px}
+  .about,.shots{padding-top:56px}
+  .shot{margin-bottom:44px}
+  .meta{gap:20px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <a href="../../" class="topbar__back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>все проекты</span>
+  </a>
+  <span class="topbar__brand">ENJE</span>
+  <a href="https://t.me/astrapsc" target="_blank" rel="noopener" class="topbar__cta">написать</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <p class="hero__eyebrow reveal">Концепт интернет-магазина · UX/UI</p>
+    <h1 class="hero__title reveal">ENJE</h1>
+    <div class="hero__grid">
+      <p class="hero__lead reveal">
+        Концепт интернет-магазина для небольшого бренда украшений преимущественно
+        из натурального жемчуга. Проект начался с реального брифа и вырос
+        в полноценный сценарий покупки — от каталога до личного кабинета.
+      </p>
+      <div class="meta reveal">
+        <div>
+          <div class="meta__k">Роль</div>
+          <div class="meta__v">UX/UI-дизайн, вся визуальная часть</div>
+        </div>
+        <div>
+          <div class="meta__k">Формат</div>
+          <div class="meta__v">Десктоп и мобильная версия</div>
+        </div>
+        <div>
+          <div class="meta__k">Инструменты</div>
+          <div class="meta__v">Figma, Nano Banana Pro</div>
+        </div>
+        <div>
+          <div class="meta__k">Объём</div>
+          <div class="meta__v">11 разделов сценария покупки</div>
+        </div>
+      </div>
+    </div>
+    <div class="tags reveal">
+      <span class="is-solid">web</span>
+      <span>mobile</span>
+      <span>e-commerce</span>
+      <span>каталог и фильтры</span>
+      <span>оформление заказа</span>
+    </div>
+  </div>
+</section>
+
+<!-- ЗАДАЧА / РЕШЕНИЕ -->
+<section class="about">
+  <div class="wrap">
+    <div class="about__grid">
+      <div class="reveal">
+        <div class="about__k">Задача</div>
+        <p class="about__t">Небольшой бренд украшений ручной сборки из натурального жемчуга. Нужен был магазин, который выглядит как <b>ювелирный дом, а не как маркетплейс</b>, и при этом честно ведёт человека к покупке.</p>
+      </div>
+      <div class="reveal">
+        <div class="about__k">Решение</div>
+        <p class="about__t">Взяла <b>editorial-подход</b>: воздух, крупная антиква, приглушённая кремовая палитра и фотография как главный герой. Интерфейсные элементы — намеренно тихие, чтобы не спорить с украшениями.</p>
+      </div>
+      <div class="reveal">
+        <div class="about__k">Что внутри</div>
+        <p class="about__t">Не набор красивых экранов, а <b>весь путь покупателя</b>: главная, каталог с фильтрами, состояния карточек, карточка товара, регистрация, чекаут, личный кабинет и мобильная версия.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СЕКЦИИ -->
+<section class="shots">
+  <div class="wrap">
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">01</span><span class="shot__name">Обложка — сайт сразу в центре внимания</span></figcaption>
+      <button class="shot__img" data-full="img/01.jpg"><img src="img/01.jpg" alt="ENJE — обложка кейса" loading="eager"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">02</span><span class="shot__name">Полный сайт и пользовательский путь</span></figcaption>
+      <button class="shot__img" data-full="img/02.jpg"><img src="img/02.jpg" alt="Полный сайт и пользовательский путь" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">03</span><span class="shot__name">Главная — ключевые фрагменты</span></figcaption>
+      <button class="shot__img" data-full="img/03.jpg"><img src="img/03.jpg" alt="Главная страница, ключевые фрагменты" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">04</span><span class="shot__name">Каталог и фильтры</span></figcaption>
+      <button class="shot__img" data-full="img/04.jpg"><img src="img/04.jpg" alt="Каталог и фильтры" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">05</span><span class="shot__name">Карточки товаров и их состояния</span></figcaption>
+      <button class="shot__img" data-full="img/05.jpg"><img src="img/05.jpg" alt="Карточки товаров и состояния" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">06</span><span class="shot__name">Карточка товара</span></figcaption>
+      <button class="shot__img" data-full="img/06.jpg"><img src="img/06.jpg" alt="Карточка товара" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">07</span><span class="shot__name">Регистрация и вход</span></figcaption>
+      <button class="shot__img" data-full="img/07.jpg"><img src="img/07.jpg" alt="Регистрация и вход" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">08</span><span class="shot__name">Оформление заказа</span></figcaption>
+      <button class="shot__img" data-full="img/08.jpg"><img src="img/08.jpg" alt="Оформление заказа" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">09</span><span class="shot__name">Личный кабинет</span></figcaption>
+      <button class="shot__img" data-full="img/09.jpg"><img src="img/09.jpg" alt="Личный кабинет" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">10</span><span class="shot__name">Мобильная версия</span></figcaption>
+      <button class="shot__img" data-full="img/10.jpg"><img src="img/10.jpg" alt="Мобильная версия" loading="lazy"></button>
+    </figure>
+
+    <figure class="shot reveal">
+      <figcaption class="shot__cap"><span class="shot__num">11</span><span class="shot__name">Финал</span></figcaption>
+      <button class="shot__img" data-full="img/11.jpg"><img src="img/11.jpg" alt="Финальный разворот кейса" loading="lazy"></button>
+    </figure>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2 class="cta__title reveal">Нужен такой же<br>магазин или лендинг?</h2>
+    <p class="cta__text reveal">Расскажите про бренд — соберу дизайн от концепции до готового сайта.</p>
+    <div class="cta__links reveal">
+      <a href="https://t.me/astrapsc" target="_blank" rel="noopener" class="btn btn--dark">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.44 3.81-1.58 4.6-1.86 5.12-1.87.11 0 .37.03.54.17.14.12.18.28.2.45-.01.06.01.24 0 .38z"/></svg>
+        <span>написать в Telegram</span>
+      </a>
+      <a href="../../" class="btn btn--ghost"><span>другие проекты</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <span class="footer__note">Реальный бриф · некоммерческий концепт</span>
+    <span class="footer__note">Изображения созданы в Nano Banana Pro</span>
+    <a href="../../" class="footer__note">← astrapsc.ru</a>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр раздела">
+  <button class="lb__close" id="lbClose" aria-label="Закрыть">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <img id="lbImg" alt="">
+</div>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.06, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  var topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', function(){
+    topbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, {passive:true});
+
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; lbImg.src=''; }
+  document.querySelectorAll('.shot__img').forEach(function(b){
+    b.addEventListener('click', function(){
+      lbImg.src = b.dataset.full;
+      lbImg.alt = b.querySelector('img').alt;
+      lb.classList.add('open');
+      lb.scrollTop = 0;
+      document.body.style.overflow='hidden';
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) close(); });
+})();
+</script>
+</body>
+</html>
